@@ -13,7 +13,6 @@ public class MainView extends JFrame{
 	JMenuItem rechercherVoyage = new JMenuItem("Rechercher un voyage");
 	JMenuItem creerVoyage = new JMenuItem("Créer un voyage");
 	JMenuItem mesVoyages = new JMenuItem("Mes voyages");
-	JMenuItem profil = new JMenuItem("Profil");
 	JMenuItem exit = new JMenuItem("exit");
 	Container pane;
 	CardLayout layout;
@@ -26,7 +25,6 @@ public class MainView extends JFrame{
 		menuBar.add(rechercherVoyage);
 		menuBar.add(creerVoyage);
 		menuBar.add(mesVoyages);
-		menuBar.add(profil);
 		menuBar.add(exit);
 			
 		this.setJMenuBar(menuBar);

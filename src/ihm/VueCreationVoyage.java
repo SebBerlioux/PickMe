@@ -1,7 +1,9 @@
 package ihm;
 
 import javax.swing.JPanel;
-import javax.swing.BoxLayout;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import javax.swing.BorderFactory;
 import javax.swing.JTextField;
 import javax.swing.JLabel;
 import javax.swing.JButton;
@@ -9,6 +11,7 @@ import javax.swing.JButton;
 
 public class VueCreationVoyage extends JPanel {
 	
+	//panel gauche
 	public JLabel depart;
 	public JLabel date;
 	public JLabel heureDepart;
@@ -20,9 +23,33 @@ public class VueCreationVoyage extends JPanel {
 	public JTextField txtFHeure1;
 	public JTextField txtFHeure2;
 	public JTextField txtFPlace;
-	public JButton boutton;
+	public JPanel gauche;
+	public JPanel droite;
+	
+	//panel droite
+	public JLabel villeEtape;
+	public JLabel heureArrivee;
+	public JLabel lieuRdv;
+	public JLabel prix;
+	public JTextField txtVilleEtape;
+	public JTextField txtHeure;
+	public JTextField txtMinute;
+	public JTextField txtLieuRdv;
+	public JTextField txtPrix;
+	public JButton boutonAjouter;
+	public JButton boutonTerminer;
 	
 	public VueCreationVoyage() {
+		this.gauche = new JPanel();
+		this.droite = new JPanel();
+		
+		//layouts
+		gauche.setLayout(new GridBagLayout());
+		GridBagConstraints c1 = new GridBagConstraints();
+		droite.setLayout(new GridBagLayout());
+		GridBagConstraints c2 = new GridBagConstraints();
+		
+		//panel gauche
 		this.depart = new JLabel("Départ: ");
 		this.date = new JLabel("Date: ");
 		this.heureDepart = new JLabel("Heure de départ: ");
@@ -34,7 +61,19 @@ public class VueCreationVoyage extends JPanel {
 		this.txtFHeure1 = new JTextField(2);
 		this.txtFHeure2 = new JTextField(2);
 		this.txtFPlace = new JTextField(2);
-		this.boutton = new JButton("Suivant");
+		
+		//panel droite
+		this.villeEtape = new JLabel("Ville étape: ");
+		this.heureArrivee = new JLabel("Heure d'arrivée: ");
+		this.lieuRdv = new JLabel("Lieu de rendez-vous: ");
+		this.prix = new JLabel("Prix: ");
+		this.txtVilleEtape = new JTextField(10);
+		this.txtHeure = new JTextField(2);
+		this.txtMinute = new JTextField(2);
+		this.txtLieuRdv = new JTextField(10);
+		this.txtPrix = new JTextField(2);
+		this.boutonAjouter = new JButton("Ajouter");
+		this.boutonTerminer = new JButton("Terminer");
 		
 		boxDepart.setEditable(true);
 		txtFDate1.setEditable(true);
@@ -44,32 +83,81 @@ public class VueCreationVoyage extends JPanel {
 		txtFHeure2.setEditable(true);
 		txtFPlace.setEditable(true);
 		
-		JPanel panel1 = new JPanel();
-		JPanel panel2 = new JPanel();
-		JPanel panel3 = new JPanel();
-		JPanel panel4 = new JPanel();
+		//ajout des champs du panel gauche
+		c1.gridx = 0;
+		c1.gridy = 0;
+		gauche.add(depart, c1);
+		c1.gridx = 1;
+		c1.gridy = 0;
+		gauche.add(boxDepart, c1);
+		c1.gridx = 0;
+		c1.gridy = 1;
+		gauche.add(date, c1);
+		c1.gridx = 1;
+		c1.gridy = 1;
+		gauche.add(txtFDate1, c1);
+		c1.gridx = 2;
+		c1.gridy = 1;
+		gauche.add(txtFDate2, c1);
+		c1.gridx = 3;
+		c1.gridy = 1;
+		gauche.add(txtFDate3, c1);
+		c1.gridx = 0;
+		c1.gridy = 2;
+		gauche.add(heureDepart, c1);
+		c1.gridx = 1;
+		c1.gridy = 2;
+		gauche.add(txtFHeure1, c1);
+		c1.gridx = 2;
+		c1.gridy = 2;
+		gauche.add(txtFHeure2, c1);
+		c1.gridx = 0;
+		c1.gridy = 3;
+		gauche.add(nbPlace, c1);
+		c1.gridx = 1;
+		c1.gridy = 3;
+		gauche.add(txtFPlace, c1);
 		
-		panel1.add(depart);
-		panel1.add(boxDepart);
 		
-		panel2.add(date);
-		panel2.add(txtFDate1);
-		panel2.add(txtFDate2);
-		panel2.add(txtFDate3);
+		//ajout des champs du panel gauche
+		c2.gridx = 0;
+		c2.gridy = 0;
+		droite.add(villeEtape, c2);
+		c2.gridx = 1;
+		c2.gridy = 0;
+		droite.add(txtVilleEtape, c2);
+		c2.gridx = 0;
+		c2.gridy = 1;
+		droite.add(heureArrivee, c2);
+		c2.gridx = 1;
+		c2.gridy = 1;
+		droite.add(txtHeure, c2);
+		c2.gridx = 2;
+		c2.gridy = 1;
+		droite.add(txtMinute, c2);
+		c2.gridx = 0;
+		c2.gridy = 2;
+		droite.add(lieuRdv, c2);
+		c2.gridx = 1;
+		c2.gridy = 2;
+		droite.add(txtLieuRdv, c2);
+		c2.gridx = 0;
+		c2.gridy = 3;
+		droite.add(prix, c2);
+		c2.gridx = 1;
+		c2.gridy = 3;
+		droite.add(txtPrix, c2);
+		c2.gridx = 1;
+		c2.gridy = 4;
+		droite.add(boutonAjouter, c2);
+		c2.gridx = 1;
+		c2.gridy = 5;
+		droite.add(boutonTerminer, c2);
 		
-		panel3.add(heureDepart);
-		panel3.add(txtFHeure1);
-		panel3.add(txtFHeure2);
+		gauche.setBorder(BorderFactory.createEtchedBorder());
+		droite.setBorder(BorderFactory.createEtchedBorder());
 		
-		panel4.add(nbPlace);
-		panel4.add(txtFPlace);
-		
-		this.add(panel1);
-		this.add(panel2);
-		this.add(panel3);
-		this.add(panel4);
-		this.add(boutton);
-		
-		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+		this.add(gauche);
+		this.add(droite);
 	}
 }
