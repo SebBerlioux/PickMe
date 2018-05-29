@@ -1,4 +1,5 @@
 package entree_sortie;
+import GestionDonnees.*;
 
 import java.io.*;
 import java.util.ArrayList;
