@@ -1,16 +1,14 @@
-package IHM;
+package ihm;
 
 import javax.swing.JPanel;
 import javax.swing.BoxLayout;
 import javax.swing.JTextField;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JButton;
 
 
-public class VueCreationVoyage extends JFrame {
+public class VueCreationVoyage extends JPanel {
 	
-	public JLabel titre;
 	public JLabel depart;
 	public JLabel date;
 	public JLabel heureDepart;
@@ -25,7 +23,6 @@ public class VueCreationVoyage extends JFrame {
 	public JButton boutton;
 	
 	public VueCreationVoyage() {
-		this.titre = new JLabel("Créer un voyage");
 		this.depart = new JLabel("Départ: ");
 		this.date = new JLabel("Date: ");
 		this.heureDepart = new JLabel("Heure de départ: ");
@@ -52,8 +49,6 @@ public class VueCreationVoyage extends JFrame {
 		JPanel panel3 = new JPanel();
 		JPanel panel4 = new JPanel();
 		
-		this.add(titre);
-		
 		panel1.add(depart);
 		panel1.add(boxDepart);
 		
@@ -69,12 +64,10 @@ public class VueCreationVoyage extends JFrame {
 		panel4.add(nbPlace);
 		panel4.add(txtFPlace);
 		
+		this.add(panel1);
+		this.add(panel2);
+		this.add(panel3);
+		this.add(panel4);
 		this.add(boutton);
-
-		setSize(1000,500);
-		setLayout(new BoxLayout(getContentPane(), BoxLayout.X_AXIS));
-		//setContentPane();
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setVisible(true);
 	}
 }

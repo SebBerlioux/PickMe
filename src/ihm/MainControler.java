@@ -14,15 +14,14 @@ public class MainControler {
 		ActionCreerVoyage creerVoyage = new ActionCreerVoyage();
 		
 		//Ajout de toutes les vues et les lier au cardlayout
-	Vue1 vue1 = new Vue1();
-		Vue2 vue2 = new Vue2();
+		Vue1 vue1 = new Vue1();
+		VueCreationVoyage vueCreationVoyage = new VueCreationVoyage();
 		this.mainView.pane.add(vue1,"Vue1");
-		this.mainView.pane.add(vue2,"Vue2");
+		this.mainView.pane.add(vueCreationVoyage,"Creation Voyage");
 		
 		//On lie les actions au menu
 		this.mainView.rechercherVoyage.addActionListener(rechercherVoyage);
 		this.mainView.creerVoyage.addActionListener(creerVoyage);
-		
 	}
 	
 	public class ActionRechercherVoyage extends AbstractAction {
@@ -37,7 +36,7 @@ public class MainControler {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			mainView.layout.show(mainView.pane, "Vue2");
+			mainView.layout.show(mainView.pane, "Creation Voyage");
 		}
 }
 	

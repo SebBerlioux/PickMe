@@ -1,4 +1,4 @@
-package IHM;
+package ihm;
 
 public class TestVue {
 
