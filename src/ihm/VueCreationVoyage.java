@@ -69,5 +69,7 @@ public class VueCreationVoyage extends JPanel {
 		this.add(panel3);
 		this.add(panel4);
 		this.add(boutton);
+		
+		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 	}
 }
