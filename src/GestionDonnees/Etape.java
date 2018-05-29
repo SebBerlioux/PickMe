@@ -1,8 +1,9 @@
 package GestionDonnees;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Etape {
+public class Etape implements Serializable{
 
 	protected String villeD;
 	protected String villeA;
@@ -51,4 +52,8 @@ public class Etape {
 	public void addPassager(Utilisateur user) {
 		this.passagers.add(user);
 	}
+	
+	public String toString(){
+	    return "Ville de départ: " + this.villeD + "\n" + "Ville d'arrivée: " + this.villeA + "\n" + "Prix: " + this.prix + "\n" + "Nombre de places: " + this.nbPlace + "\n" + "Lieu de rendez-vous: " + this.lieuRdv + "\n" + "Heure de départ: " + this.heureDepart + "\n" + "Heure d'arrivée: " + this.heureArriveeVilleA + "\n" + "Passagers: " + this.passagers + "\n";
+	  } 
 }
