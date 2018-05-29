@@ -4,6 +4,7 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 
 import javax.swing.BorderFactory;
+import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -31,15 +32,12 @@ public class VueRechercherVoyage extends JPanel{
 		public VueRechercherVoyage() {
 			this.gauche = new JPanel();
 			this.droite = new JPanel();
-			this.milieu = new JPanel();
 			
 			//layouts
 			gauche.setLayout(new GridBagLayout());
 			GridBagConstraints c1 = new GridBagConstraints();
-			milieu.setLayout(new GridBagLayout());
+			droite.setLayout(new BoxLayout(droite, BoxLayout.Y_AXIS));
 			GridBagConstraints c2 = new GridBagConstraints();
-			droite.setLayout(new GridBagLayout());
-			GridBagConstraints c3 = new GridBagConstraints();
 			
 			//panel gauche
 			this.depart = new JLabel("Départ: ");
@@ -85,14 +83,10 @@ public class VueRechercherVoyage extends JPanel{
 			gauche.add(boutonRechercher, c1);
 			
 			
-			//ajout des champs du panel gauche
-
-			
 			gauche.setBorder(BorderFactory.createEtchedBorder());
 			droite.setBorder(BorderFactory.createEtchedBorder());
 			
 			this.add(gauche);
-			this.add(milieu);
 			this.add(droite);
 		}
 }

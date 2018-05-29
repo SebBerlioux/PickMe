@@ -19,10 +19,10 @@ public class MainControler {
 		//Ajout de toutes les vues des controleurs et les lier au cardlayout
 		ControleurRechercherVoyage controleurRechercherVoyage = new ControleurRechercherVoyage();
 		ControleurCreationVoyage controleurCreationVoyage = new ControleurCreationVoyage();
-		VueVoyages vueVoyages = new VueVoyages(null);
+		ControleurVueVoyages controleurVueVoyages = new ControleurVueVoyages(null);
 		this.mainView.pane.add(controleurRechercherVoyage.vue,"Rechercher voyage");
 		this.mainView.pane.add(controleurCreationVoyage.vue,"Creation voyage");
-		this.mainView.pane.add(vueVoyages,"Mes voyages");
+		this.mainView.pane.add(controleurVueVoyages.vue,"Mes voyages");
 		
 		//On lie les actions au menu
 		this.mainView.rechercherVoyage.addActionListener(rechercherVoyage);

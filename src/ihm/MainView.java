@@ -30,8 +30,7 @@ public class MainView extends JFrame{
 		this.setJMenuBar(menuBar);
         setTitle("PickMe");  
         setJMenuBar(menuBar);    
-		this.setExtendedState(JFrame.MAXIMIZED_BOTH); //fullscreen
-        this.setSize(new Dimension(1000,1000));
+        this.setSize(new Dimension(800,500));
 		this.setVisible(true);
 	}
 
