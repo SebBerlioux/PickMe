@@ -4,21 +4,22 @@ import java.awt.Component;
 import javax.swing.DefaultCellEditor;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
-import javax.swing.JFrame;
+import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableCellRenderer;
 
-public class VueVoyages extends JFrame{
+public class VueVoyages extends JPanel{
 	
 	public JTable myTable;
 	public String[] columnsNames = {"Trajet", "Date", "Conducteur", "Prix", "Etat", "Détails"};
-	public Object[][] data = {{"xxx","xxx","xxx","xxx","xxx"},{"xxx","xxx","xxx","xxx","xxx"}};
+	public Object[][] data;
 	public JButton button = new JButton();
 			
-	public VueVoyages() {
+	public VueVoyages(Object[][] data) {
 		this.myTable = new JTable(data, columnsNames);
+		this.data = data;
 		
 		myTableModel model = new myTableModel();
 		myTable.setModel(model);
@@ -67,8 +68,4 @@ public class VueVoyages extends JFrame{
 		}
 
 	}         
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> 50af25b4c836bb402f654be649160a2871776c6f
