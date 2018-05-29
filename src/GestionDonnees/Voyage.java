@@ -1,8 +1,9 @@
 package GestionDonnees;
 
 import java.util.ArrayList;
+import java.io.Serializable;
 
-public class Voyage {
+public class Voyage implements Serializable {
 	
 	private String date;
 	private Integer prix;
@@ -165,4 +166,9 @@ public class Voyage {
 	public String getEtapeArrivee(Etape etape) {
 		return etape.getVilleA();
 	}
+	
+	public String toString(){
+	    return "Date: " + this.date + "\n" + "Trajet: " + this.trajet + "\n" + "Conducteur: " + this.conducteur + "\n" + "Prix: " + this.prix + "\n";
+	  } 
+
 }

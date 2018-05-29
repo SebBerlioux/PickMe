@@ -1,8 +1,9 @@
 package GestionDonnees;
 
 import java.util.ArrayList;
+import java.io.Serializable;
 
-public class Utilisateur {
+public class Utilisateur implements Serializable{
 	
 	private String nom;
 	private String prenom;
@@ -42,7 +43,7 @@ public class Utilisateur {
 		System.out.println("type conduite: " + this.typeConduite);
 		System.out.println("comportement au volant: " + this.comportementAuVolant);
 		System.out.println("nombre de signalement: " + this.nbSignalement);
-	} 
+	}
 	
 	public String getNom() {
 		//System.out.println(this.nom);
