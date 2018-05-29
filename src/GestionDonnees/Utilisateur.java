@@ -89,4 +89,8 @@ public class Utilisateur {
 		this.nbSignalement = this.nbSignalement+1;
 	}
 	
+	 public String toString(){
+		    return "Nom: " + this.nom + "\n" + "Prenom: " + this.prenom + "\n" + "Tel: " + this.tel + "\n" + "Email: " + this.email + "\n" + "Mdp: " + this.mdp + "\n" + "Type de véhicule: " + this.typeVehicule + "\n" + "Type de conduite: " + this.typeConduite + "\n" + "Comportement au volant: " + this.comportementAuVolant + "\n" + "Liste noire: " + this.listeNoire + "\n" + "Nombre de signalements: " + this.nbSignalement + "\n";
+		  } 
+	
 }
