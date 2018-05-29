@@ -1,13 +1,9 @@
 package ihm;
 
 import javax.swing.JPanel;
-
-import java.awt.BorderLayout;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
-
 import javax.swing.BorderFactory;
-import javax.swing.BoxLayout;
 import javax.swing.JTextField;
 import javax.swing.JLabel;
 import javax.swing.JButton;
