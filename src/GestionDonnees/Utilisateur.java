@@ -17,7 +17,7 @@ public class Utilisateur implements Serializable {
 	private ArrayList<Utilisateur> listeNoire;
 	private Integer nbSignalement;
 	protected ArrayList<Voyage> creationVoyage = new ArrayList<Voyage>(); //liste intermédiaire utilisée lors de la création d'un voyage
-	protected ArrayList<Voyage> listeVoyages = new ArrayList<Voyage>();
+	protected ArrayList<Voyage> listeVoyages;
 
 
 	public Utilisateur(String nom, String prenom, String tel, String email, String mdp, String typeVehicule, String typeConduite, String comportementAuVolant) {
@@ -31,6 +31,7 @@ public class Utilisateur implements Serializable {
 		this.comportementAuVolant = comportementAuVolant;
 		this.listeNoire = new ArrayList<Utilisateur>();
 		this.nbSignalement = 0;
+		this.listeVoyages = new ArrayList<Voyage>();
 	}
 	
 	/*public void newUtilisateur(Utilisateur user) {
@@ -267,14 +268,37 @@ public class Utilisateur implements Serializable {
 		}
 		voyage.trajet = trajet;
 		this.creationVoyage.add(voyage);
-		System.out.println(creationVoyage);
 	}
 	
 	public void ecrireVoyage() {
 		EcritureFichier ecriture = new EcritureFichier();
-		Voyage voyage = creationVoyage.get(0);
+		Voyage voyage = new Voyage();
+		voyage = creationVoyage.get(0);
 		ecriture.writeTrip(voyage);
+		ecrireVoyageUser(voyage);
+	}
+	
+	public void ecrireVoyageUser(Voyage voyage) {
+		ArrayList<Utilisateur> bdd = new ArrayList<Utilisateur>(); //liste des utilisateurs présents dans la base de données
+		
+		//on lit la base de données et on supprime dans la bdd l'utilisateur que l'on va modifier
+		LectureFichier lecture = new LectureFichier();
+		bdd = lecture.readUser("users.txt");
+		for(int i=0; i<bdd.size(); i++){
+			if(bdd.get(i).equals(this)) {
+				bdd.remove(i);
+			}
+		}
+		
+		//on ajoute à l'utilisateur un voyage dans la bdd (en écrasant ce qu'il y a dedans)
 		this.listeVoyages.add(voyage);
+		EcritureFichier ecriture = new EcritureFichier();
+		ecriture.overWriteUser(this);
+		
+		// puis on ajoute au fichier "users.txt" les utilisateurs qui n'ont pas été modifiés
+		for(int i=0; i<bdd.size(); i++){
+			ecriture.writeUser(bdd.get(i));
+		}
 	}
 	
 	public ArrayList<String> resumeVoyage() {
@@ -351,7 +375,8 @@ public class Utilisateur implements Serializable {
 	
 	public ArrayList<String> mesVoyages(){
 		ArrayList<String> res = new ArrayList<String>();
-		ArrayList<Voyage> listeVoyages = this.listeVoyages;
+		ArrayList<Voyage> listeVoyages = this.creationVoyage;
+		System.out.println(creationVoyage);
 		for(int i=0; i<listeVoyages.size(); i++) {
 			res.add(listeVoyages.get(i).getDepart());
 			res.add(listeVoyages.get(i).getArrivee());
