@@ -76,7 +76,7 @@ public class VueConnexion extends JFrame {
 		this.comportement = new JLabel("Comportement au volant:");
 		this.txtFcomportement = new JTextField(10);
 		
-		this.boutonInscription2 = new JButton("S'inscrire");
+		this.boutonInscription2 = new JButton();
 		
 		JPanel panelprenom = new JPanel();
 		panelprenom.add(prenom);

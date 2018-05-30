@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import javax.swing.AbstractAction;
 
 import GestionDonnees.Utilisateur;
+import entree_sortie.EcritureFichier;
 import entree_sortie.LectureFichier;
 
 public class ControleurConnexion {
@@ -17,14 +18,17 @@ public class ControleurConnexion {
 		//création des actions
 		ActionConnexion connexion = new ActionConnexion();
 		ActionInscription inscription = new ActionInscription();
+		ActionValiderInscription validerInscription = new ActionValiderInscription();
 		
 		//on lie les actions aux boutons
 		this.vue.boutonConnexion.setAction(connexion);
 		this.vue.boutonInscription.setAction(inscription);
+		this.vue.boutonInscription2.setAction(validerInscription);
 		
 		//ajout du texte aux boutons
 		this.vue.boutonConnexion.setText("Connexion");
 		this.vue.boutonInscription.setText("S'inscrire");
+		this.vue.boutonInscription2.setText("S'inscrire");
 		
 	}
 	
@@ -66,7 +70,20 @@ public class ControleurConnexion {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			System.out.println("S'inscrire");
+			vue.panelConnexion.setVisible(false);
+			vue.panelInscription.setVisible(true);
+		}
+		
+	}
+	
+	public class ActionValiderInscription extends AbstractAction {
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			EcritureFichier nouvelUtilisateur = new EcritureFichier();
+			nouvelUtilisateur.creerUtilisateur(vue.txtFnom.getText(), vue.txtFprenom.getText(), vue.txtFtel.getText(), vue.txtFmail2.getText(), vue.txtFmdp2.getText(), vue.txtFvehicule.getText(), vue.txtFconduite.getText(), vue.txtFcomportement.getText());
+			vue.panelConnexion.setVisible(true);
+			vue.panelInscription.setVisible(false);
 		}
 		
 	}
