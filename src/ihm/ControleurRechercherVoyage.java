@@ -16,6 +16,10 @@ public class ControleurRechercherVoyage {
 			this.vue.droite.add(new ControleurSousVueRechercherVoyage().vue);
 		}
 	}
+	
+	public void init() {
+		
+	}
 
 	public class ActionRechercher extends AbstractAction {
 
