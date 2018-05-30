@@ -40,6 +40,10 @@ public class Voyage implements Serializable {
 		return this.date;
 	}
 	
+	public String getEtat() {
+		return this.etat;
+	}
+	
 	public ArrayList<Etape> getTrajet(){
 		return this.trajet;
 	}

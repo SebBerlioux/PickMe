@@ -195,7 +195,7 @@ public class Utilisateur implements Serializable {
 	}
 	
 	public void annulerVoyage(Voyage voyage) {
-		ArrayList<Voyage> bdd = new ArrayList<Voyage>(); //liste des utilisateurs présents dans la base de données
+		ArrayList<Voyage> bdd = new ArrayList<Voyage>(); //liste des voyages présents dans la base de données
 		
 		//on lit la base de données et on supprime dans la bdd le voyage que l'on va annuler
 		LectureFichier lecture = new LectureFichier();
@@ -210,7 +210,31 @@ public class Utilisateur implements Serializable {
 		EcritureFichier ecriture = new EcritureFichier();
 		ecriture.overWriteTrip(voyage);
 		
-		// puis on ajoute au fichier "users.txt" les utilisateurs qui n'ont pas été modifiés
+		// puis on ajoute au fichier "trips.txt" les voyages qui n'ont pas été modifiés
+		for(int i=0; i<bdd.size(); i++){
+			ecriture.writeTrip(bdd.get(i));
+		}
+	}
+	
+	public void annulerReservation(Voyage voyage) {
+		ArrayList<Voyage> bdd = new ArrayList<Voyage>(); //liste des voyages présents dans la base de données
+		
+		//on lit la base de données et on supprime dans la bdd le voyage que l'on va modifier
+		LectureFichier lecture = new LectureFichier();
+		bdd = lecture.readTrip("trips.txt");
+
+		for(int i=0; i<bdd.size(); i++){
+			if(bdd.get(i).equals(voyage)) {
+				bdd.remove(i);
+			}
+		}
+		
+		//on enlève le passager du voyage, on écrit le nouveau voyage dans la bdd (en écrasant ce qu'il y a dedans)
+		voyage.removePassager(this);
+		EcritureFichier ecriture = new EcritureFichier();
+		ecriture.overWriteTrip(voyage);
+		
+		// puis on ajoute au fichier "trips.txt" les voyages qui n'ont pas été modifiés
 		for(int i=0; i<bdd.size(); i++){
 			ecriture.writeTrip(bdd.get(i));
 		}
@@ -319,6 +343,21 @@ public class Utilisateur implements Serializable {
 		return this.listeVoyages;
 	}
 	
+	public ArrayList<String> mesVoyages(){
+		ArrayList<String> res = new ArrayList<String>();
+		ArrayList<Voyage> listeVoyages = this.getVoyages();
+		for(int i=0; i<listeVoyages.size(); i++) {
+			res.add(listeVoyages.get(i).getDepart());
+			res.add(listeVoyages.get(i).getArrivee());
+			res.add(listeVoyages.get(i).getDate());
+			res.add(listeVoyages.get(i).getConducteur().getNom());
+			res.add(listeVoyages.get(i).getConducteur().getPrenom());
+			res.add(Integer.toString(listeVoyages.get(i).getPrixTotal()));
+			res.add(listeVoyages.get(i).getEtat());
+		}
+		return res;
+	}
+	
 	public void reserver(Voyage voyage, String villeD, String villeA) {
 		
 		ArrayList<Voyage> bdd = new ArrayList<Voyage>(); //liste des voyages présents dans la base de données
@@ -344,6 +383,10 @@ public class Utilisateur implements Serializable {
 		// on écrit le voyage modifié dans le "trips.txt" (en écrasant tout ce qu'il y avait)
 		EcritureFichier ecriture = new EcritureFichier();
 		ecriture.overWriteTrip(res);
+		
+		// on ajoute le voyage à la liste des voyages
+		listeVoyages.add(res);
+		
 		// puis on ajoute au fichier "trips.txt" les voyages qui n'ont pas été modifiés
 		for(int i=0; i<bdd.size(); i++){
 			ecriture.writeTrip(bdd.get(i));
