@@ -16,7 +16,7 @@ public class Utilisateur implements Serializable {
 	private String comportementAuVolant;
 	private ArrayList<Utilisateur> listeNoire;
 	private Integer nbSignalement;
-	protected ArrayList<Voyage> creationVoyage; //liste intermédiaire utilisée lors de la création d'un voyage
+	protected ArrayList<Voyage> creationVoyage = new ArrayList<Voyage>(); //liste intermédiaire utilisée lors de la création d'un voyage
 	protected ArrayList<Voyage> listeVoyages;
 
 
@@ -175,9 +175,7 @@ public class Utilisateur implements Serializable {
 	
 	public void creerVoyage(String villeD, String date, String heureD, Integer nbPlace) {
 		//on vide la pile utilisée pour la création de voyage
-		while(creationVoyage.size()>0) {
-			creationVoyage.remove(0);
-		}
+		creationVoyage.clear();
 		
 		Etape etape1 = new Etape();
 		etape1.villeD = villeD;
@@ -194,6 +192,10 @@ public class Utilisateur implements Serializable {
 		voyage.trajet = trajet;
 		
 		this.creationVoyage.add(voyage);
+	}
+	
+	public void annulerVoyage(Voyage voyage) {
+		
 	}
 	
 	public void ajouterEtape(String villeEtape, String heureA, String lieuRdv, Integer prix) {
