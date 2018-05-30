@@ -31,7 +31,7 @@ public class ControleurCreationVoyage {
 		this.vue.boutonTerminer.setAction(terminer);
 		
 		//ajout du texte aux boutons
-		this.vue.boutonSuivant.set("Suivant");
+		this.vue.boutonSuivant.setText("Suivant");
 		this.vue.boutonAjouter.setText("Ajouter");
 		this.vue.boutonTerminer.setText("Terminer");
 		
@@ -42,6 +42,8 @@ public class ControleurCreationVoyage {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			System.out.println("Création voyage");
+			vue.droite.setVisible(true);
+			vue.gauche.setVisible(false);
 		}
 		
 	}
