@@ -129,6 +129,7 @@ public class VueConnexion extends JFrame {
 		this.add(container);
 		this.setTitle("PickMe - Connexion");
 		this.setSize(400, 400);
+		this.setLocationRelativeTo(null);
 		this.setVisible(true);
 	}
 	

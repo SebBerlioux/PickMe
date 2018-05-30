@@ -30,6 +30,8 @@ public class MainView extends JFrame{
 		this.setJMenuBar(menuBar); 
         setJMenuBar(menuBar);    
         this.setSize(new Dimension(800,500));
+        this.setDefaultCloseOperation(EXIT_ON_CLOSE);
+        this.setLocationRelativeTo(null);
 		this.setVisible(true);
 	}
 
