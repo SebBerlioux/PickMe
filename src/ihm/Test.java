@@ -2,7 +2,7 @@ package ihm;
 
 public class Test {
 	public static void main(String[] args) {
-		VueConnexion connexion = new VueConnexion();
+		ControleurConnexion connexion = new ControleurConnexion();
 		//MainControler mainControler = new MainControler();
 	}
 }

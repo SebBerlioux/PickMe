@@ -16,6 +16,8 @@ public class MainControler {
 		this.utilisateur = utilisateur;
 		this.mainView = new MainView();
 		
+		this.mainView.setTitle("PickMe - Bienvenue " + utilisateur.getPrenom() + " " + utilisateur.getNom() + " !"); 
+		
 		//Création des actions
 		ActionRechercherVoyage rechercherVoyage = new ActionRechercherVoyage();
 		ActionCreerVoyage creerVoyage = new ActionCreerVoyage();

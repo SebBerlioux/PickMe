@@ -1,8 +1,12 @@
 package ihm;
 
 import java.awt.event.ActionEvent;
+import java.util.ArrayList;
 
 import javax.swing.AbstractAction;
+
+import GestionDonnees.Utilisateur;
+import entree_sortie.LectureFichier;
 
 public class ControleurConnexion {
 	VueConnexion vue;
@@ -28,7 +32,32 @@ public class ControleurConnexion {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			System.out.println("Connexion");
+			if(connexionUtilisateur(vue.txtFmail.getText(),vue.txtFmdp.getText()) != null) //si l'utilisateur existe
+			{
+				MainControler controleur = new MainControler(connexionUtilisateur(vue.txtFmail.getText(),vue.txtFmdp.getText()));
+			}
+			else
+			{
+				System.out.println("Connexion echouée");
+			}
+		}
+		
+		public Utilisateur connexionUtilisateur(String email, String mdp) {
+			ArrayList<Utilisateur> bdd = new ArrayList<Utilisateur>(); //liste des utilisateurs présents dans la base de données
+			
+			//on lit la base de données
+			try {
+				LectureFichier lecture = new LectureFichier();
+				bdd = lecture.readUser("users.txt");
+				for(int i=0; i<bdd.size(); i++){
+					if(bdd.get(i).getEmail().equals(email) && bdd.get(i).getMdp().equals(mdp)) {
+						return bdd.get(i);
+					}
+				}
+			}
+			catch(NullPointerException e){}
+
+			return null;
 		}
 		
 	}

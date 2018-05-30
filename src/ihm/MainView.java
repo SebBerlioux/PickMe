@@ -27,8 +27,7 @@ public class MainView extends JFrame{
 		menuBar.add(mesVoyages);
 		menuBar.add(exit);
 			
-		this.setJMenuBar(menuBar);
-        setTitle("PickMe");  
+		this.setJMenuBar(menuBar); 
         setJMenuBar(menuBar);    
         this.setSize(new Dimension(800,500));
 		this.setVisible(true);
