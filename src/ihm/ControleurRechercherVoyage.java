@@ -7,30 +7,24 @@ import javax.swing.AbstractAction;
 
 public class ControleurRechercherVoyage {
 	VueRechercherVoyage vue;
-	
+
 	public ControleurRechercherVoyage() {
 		this.vue = new VueRechercherVoyage();
-		
+
 		for(int i=0; i<3; i++)
 		{
 			this.vue.droite.add(new ControleurSousVueRechercherVoyage().vue);
 		}
 	}
-	
-	public class ActionBouton extends AbstractAction implements Observer{
+
+	public class ActionRechercher extends AbstractAction {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			// TODO Auto-generated method stub
-			
+
 		}
 
-		@Override
-		public void update(Observable o, Object arg) {
-			// TODO Auto-generated method stub
-			
-		}
-		
 	}
 }
 

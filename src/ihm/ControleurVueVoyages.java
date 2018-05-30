@@ -12,7 +12,7 @@ public class ControleurVueVoyages {
 		this.vue = new VueVoyages(data);
 	}
 	
-	public class ActionBouton extends AbstractAction implements Observer{
+	public class ActionDétails extends AbstractAction implements Observer{
 
 		@Override
 		public void actionPerformed(ActionEvent e) {

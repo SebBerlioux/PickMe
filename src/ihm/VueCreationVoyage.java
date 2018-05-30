@@ -10,7 +10,7 @@ import javax.swing.JButton;
 
 
 public class VueCreationVoyage extends JPanel {
-	
+
 	//panel gauche
 	public JLabel depart;
 	public JLabel date;
@@ -25,7 +25,7 @@ public class VueCreationVoyage extends JPanel {
 	public JTextField txtFPlace;
 	public JPanel gauche;
 	public JPanel droite;
-	
+
 	//panel droite
 	public JLabel villeEtape;
 	public JLabel heureArrivee;
@@ -38,17 +38,17 @@ public class VueCreationVoyage extends JPanel {
 	public JTextField txtPrix;
 	public JButton boutonAjouter;
 	public JButton boutonTerminer;
-	
+
 	public VueCreationVoyage() {
 		this.gauche = new JPanel();
 		this.droite = new JPanel();
-		
+
 		//layouts
 		gauche.setLayout(new GridBagLayout());
 		GridBagConstraints c1 = new GridBagConstraints();
 		droite.setLayout(new GridBagLayout());
 		GridBagConstraints c2 = new GridBagConstraints();
-		
+
 		//panel gauche
 		this.depart = new JLabel("Départ: ");
 		this.date = new JLabel("Date: ");
@@ -61,7 +61,7 @@ public class VueCreationVoyage extends JPanel {
 		this.txtFHeure1 = new JTextField(2);
 		this.txtFHeure2 = new JTextField(2);
 		this.txtFPlace = new JTextField(2);
-		
+
 		//panel droite
 		this.villeEtape = new JLabel("Ville étape: ");
 		this.heureArrivee = new JLabel("Heure d'arrivée: ");
@@ -72,9 +72,9 @@ public class VueCreationVoyage extends JPanel {
 		this.txtMinute = new JTextField(2);
 		this.txtLieuRdv = new JTextField(10);
 		this.txtPrix = new JTextField(2);
-		this.boutonAjouter = new JButton("Ajouter");
-		this.boutonTerminer = new JButton("Terminer");
-		
+		this.boutonAjouter = new JButton();
+		this.boutonTerminer = new JButton();
+
 		boxDepart.setEditable(true);
 		txtFDate1.setEditable(true);
 		txtFDate2.setEditable(true);
@@ -82,7 +82,7 @@ public class VueCreationVoyage extends JPanel {
 		txtFHeure1.setEditable(true);
 		txtFHeure2.setEditable(true);
 		txtFPlace.setEditable(true);
-		
+
 		//ajout des champs du panel gauche
 		c1.gridx = 0;
 		c1.gridy = 0;
@@ -117,8 +117,8 @@ public class VueCreationVoyage extends JPanel {
 		c1.gridx = 1;
 		c1.gridy = 3;
 		gauche.add(txtFPlace, c1);
-		
-		
+
+
 		//ajout des champs du panel gauche
 		c2.gridx = 0;
 		c2.gridy = 0;
@@ -153,10 +153,10 @@ public class VueCreationVoyage extends JPanel {
 		c2.gridx = 1;
 		c2.gridy = 5;
 		droite.add(boutonTerminer, c2);
-		
+
 		gauche.setBorder(BorderFactory.createEtchedBorder());
 		droite.setBorder(BorderFactory.createEtchedBorder());
-		
+
 		this.add(gauche);
 		this.add(droite);
 	}

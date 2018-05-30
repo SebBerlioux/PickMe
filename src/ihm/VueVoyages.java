@@ -11,21 +11,21 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableCellRenderer;
 
 public class VueVoyages extends JPanel{
-	
+
 	public JTable myTable;
 	public String[] columnsNames = {"Trajet", "Date", "Conducteur", "Prix", "Etat", "Détails"};
 	public Object[][] data;
 	public JButton button = new JButton();
-			
+
 	public VueVoyages(Object[][] data) {
 		this.myTable = new JTable(data, columnsNames);
 		this.data = data;
-		
+
 		myTableModel model = new myTableModel();
 		myTable.setModel(model);
 		myTable.getColumn("Détails").setCellRenderer(new ButtonRenderer());
 		myTable.getColumn("Détails").setCellEditor(new ButtonEditor(new JCheckBox()));
-		
+
 		add(new JScrollPane(myTable));
 	}
 
@@ -44,7 +44,7 @@ public class VueVoyages extends JPanel{
 	}
 
 	class ButtonEditor extends DefaultCellEditor {
-	
+
 		public ButtonEditor(JCheckBox checkbox) {
 			super(checkbox);
 		}
@@ -56,7 +56,7 @@ public class VueVoyages extends JPanel{
 	}
 
 	public class myTableModel extends DefaultTableModel {
-	
+
 		JButton button=new JButton();
 
 		public myTableModel() {
