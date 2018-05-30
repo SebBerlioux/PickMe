@@ -21,6 +21,7 @@ public class ControleurCreationVoyage {
 	public ControleurCreationVoyage(Utilisateur utilisateur) {
 		this.vue = new VueCreationVoyage();
 		this.voyage = new Voyage();
+		this.utilisateur = utilisateur;
 		
 		//création des actions
 		ActionSuivant suivant = new ActionSuivant();

@@ -5,11 +5,11 @@ import GestionDonnees.*;
 
 public class Main {
   public static void main(String[] args) {
+	  
+	  EcritureFichier ecriture = new EcritureFichier();
     
-	 Utilisateur user = new Utilisateur("Andrieux","Romain","0649736894","romandrieux29@gmail.com","red589z","Camion","lent","concentre");
-	 Utilisateur user2 = new Utilisateur("Mario","Luigi","0649736894","romandrieux29@gmail.com","red589z","Camion","lent","concentre");
-
-	 user.creerVoyage("Nantes","08/08/2008","15:56",6);
+	 ecriture.creerUtilisateur("Andrieux","Romain","0649736894","romandrieux29@gmail.com","red589z","Camion","lent","concentre");
+	 ecriture.creerUtilisateur("Mario","Luigi","0649746894","romandrieux28@gmail.com","red589z","Camion","lent","concentre");
 	 
 	 //System.out.println(lecture.readUser("users.txt"));
 	 //System.out.println(lecture.readTrip("trips.txt"));
