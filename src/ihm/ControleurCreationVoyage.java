@@ -44,6 +44,7 @@ public class ControleurCreationVoyage {
 			System.out.println("Création voyage");
 			vue.droite.setVisible(true);
 			vue.gauche.setVisible(false);
+			vue.boutonSuivant.setVisible(false);
 		}
 		
 	}
