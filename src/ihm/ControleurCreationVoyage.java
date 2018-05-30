@@ -21,16 +21,28 @@ public class ControleurCreationVoyage {
 		this.voyage = new Voyage();
 		
 		//création des actions
+		ActionSuivant suivant = new ActionSuivant();
 		ActionAjouter ajouter = new ActionAjouter();
 		ActionTerminer terminer = new ActionTerminer();
 		
 		//on lie les actions aux boutons
+		this.vue.boutonSuivant.setAction(suivant);
 		this.vue.boutonAjouter.setAction(ajouter);
 		this.vue.boutonTerminer.setAction(terminer);
 		
 		//ajout du texte aux boutons
+		this.vue.boutonSuivant.set("Suivant");
 		this.vue.boutonAjouter.setText("Ajouter");
 		this.vue.boutonTerminer.setText("Terminer");
+		
+	}
+	
+	public class ActionSuivant extends AbstractAction {
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			System.out.println("Création voyage");
+		}
 		
 	}
 	
