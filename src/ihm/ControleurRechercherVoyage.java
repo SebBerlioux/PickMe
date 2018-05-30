@@ -10,11 +10,16 @@ public class ControleurRechercherVoyage {
 
 	public ControleurRechercherVoyage() {
 		this.vue = new VueRechercherVoyage();
+		
+		ActionRechercher rechercher = new ActionRechercher();
+		this.vue.boutonRechercher.setAction(rechercher);
+		this.vue.boutonRechercher.setText("Rechercher");
 
 		for(int i=0; i<3; i++)
 		{
 			this.vue.droite.add(new ControleurSousVueRechercherVoyage().vue);
 		}
+		
 	}
 	
 	public void init() {
@@ -25,7 +30,6 @@ public class ControleurRechercherVoyage {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			// TODO Auto-generated method stub
 
 		}
 

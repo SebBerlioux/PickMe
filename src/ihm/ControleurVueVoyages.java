@@ -13,12 +13,16 @@ public class ControleurVueVoyages {
 	
 	public ControleurVueVoyages(Utilisateur utilisateur) {
 		this.utilisateur = utilisateur;
+
+		Object[][] data = null; // new Object [utilisateur.mesVoyages().size()][6];
 		
-		//récupération des voyages de l'utilisateur
-		
-		//remplissage du tableau de data
-		Object[][] data = new Object [size][6];
-		
+		/*for(int i =0; i < utilisateur.mesVoyages().size(); i++) {
+			   data[i][0] = utilisateur.mesVoyages().get(0) + ">" + utilisateur.mesVoyages().get(1);
+			   data[i][1] = utilisateur.mesVoyages().get(2);
+			   data[i][2] = utilisateur.mesVoyages().get(3) + " " + utilisateur.mesVoyages().get(4);
+			   data[i][2] = utilisateur.mesVoyages().get(5);
+			   data[i][2] = utilisateur.mesVoyages().get(6);
+		}*/
 		
 		this.vue = new VueVoyages(data);
 	}
