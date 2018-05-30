@@ -2,11 +2,12 @@ package ihm;
 
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-public class VueConnexion extends JPanel {
+public class VueConnexion extends JFrame {
 
 	//VueConnexion
 	public JLabel labelmail, mdp;
@@ -29,20 +30,22 @@ public class VueConnexion extends JPanel {
 		panelbot.add(mdp);
 		panelbot.add(txtFmdp);
 		
-		paneltop.setLayout(new BoxLayout(paneltop, BoxLayout.X_AXIS));
-		panelbot.setLayout(new BoxLayout(paneltop, BoxLayout.X_AXIS));
-		
-		add(paneltop);
-		add(panelbot);
+		//paneltop.setLayout(new BoxLayout(paneltop, BoxLayout.X_AXIS));
+		//panelbot.setLayout(new BoxLayout(paneltop, BoxLayout.X_AXIS));
 		
 		JPanel panelButton = new JPanel();
 		panelButton.add(boutonConnexion);
 		panelButton.add(boutonInscription);
 		panelButton.setLayout(new BoxLayout(panelButton, BoxLayout.X_AXIS));
 		
-		add(panelButton);
+		this.add(panelButton);
+		this.add(paneltop);
+		this.add(panelbot);
 		
-		setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
+		//setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
+		this.setTitle("PickMe - Connexion");
+		this.setSize(400, 400);
+		this.setVisible(true);
 	}
 	
 }
