@@ -212,7 +212,7 @@ public class Voyage implements Serializable {
 	}
 	
 	public String toString(){
-	    return "Date: " + this.date + "\n" + "Trajet: " + this.trajet + "\n" + "Conducteur: " + this.conducteur + "Prix: " + this.prix + "\n" ;
+	    return "Date: " + this.date + "\n" + "Trajet: " + this.trajet + "\n" + "Conducteur: " + this.conducteur + "Prix: " + this.prix + "\n" + "Etat: " + this.etat;
 	  }
 	
 	@Override

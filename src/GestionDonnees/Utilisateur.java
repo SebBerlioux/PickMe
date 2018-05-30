@@ -173,26 +173,6 @@ public class Utilisateur implements Serializable {
 		return res;
 	}
 	
-	public void creerVoyage(String villeD, String date, String heureD, Integer nbPlace) {
-		//on vide la pile utilisée pour la création de voyage
-		creationVoyage.clear();
-		
-		Etape etape1 = new Etape();
-		etape1.villeD = villeD;
-		etape1.villeA = "1ère étape";
-		etape1.heureDepart = heureD;
-		etape1.nbPlace = nbPlace;
-		
-		Voyage voyage = new Voyage();
-		voyage.date = date;
-		voyage.conducteur = this;
-		
-		ArrayList<Etape> trajet = new ArrayList<Etape>();
-		trajet.add(etape1);
-		voyage.trajet = trajet;
-		
-		this.creationVoyage.add(voyage);
-	}
 	
 	public void annulerVoyage(Voyage voyage) {
 		ArrayList<Voyage> bdd = new ArrayList<Voyage>(); //liste des voyages présents dans la base de données
@@ -240,9 +220,36 @@ public class Utilisateur implements Serializable {
 		}
 	}
 	
-	public void ajouterEtape(String villeEtape, String heureA, String lieuRdv, Integer prix) {
-		Voyage voyage = creationVoyage.get(0);
+	public void creerVoyage(String villeD, String date, String heureD, Integer nbPlace) {
+		//on vide la pile utilisée pour la création de voyage
 		creationVoyage.clear();
+		
+		Etape etape1 = new Etape();
+		etape1.villeD = villeD;
+		etape1.villeA = "1ère étape";
+		etape1.heureDepart = heureD;
+		etape1.nbPlace = nbPlace;
+		etape1.passagers = new ArrayList<Utilisateur>();
+		
+		Voyage voyage = new Voyage();
+		voyage.date = date;
+		voyage.conducteur = this;
+		voyage.prix = 0;
+		voyage.etat = "A venir";
+		
+		ArrayList<Etape> trajet = new ArrayList<Etape>();
+		trajet.add(etape1);
+		voyage.trajet = trajet;
+		
+		System.out.println(voyage);
+		
+		this.creationVoyage.add(voyage);
+	}
+	
+	
+	public void ajouterEtape(String villeEtape, String heureA, String lieuRdv, Integer prix) {
+		Voyage voyage = this.creationVoyage.get(0);
+		this.creationVoyage.clear();
 		ArrayList<Etape> trajet = voyage.getTrajet();
 		int taille = trajet.size();
 		for(int i=0; i<taille; i++) {
@@ -256,9 +263,18 @@ public class Utilisateur implements Serializable {
 				Etape etape = new Etape(trajet.get(i).getVilleA(), villeEtape, prix, trajet.get(i).nbPlace, lieuRdv, trajet.get(i).heureArriveeVilleA, heureA);
 				trajet.add(etape);
 			}
+			voyage.prix = voyage.prix + trajet.get(i).prix;
 		}
 		voyage.trajet = trajet;
-		creationVoyage.add(voyage);
+		this.creationVoyage.add(voyage);
+		System.out.println(creationVoyage);
+	}
+	
+	public void ecrireVoyage() {
+		EcritureFichier ecriture = new EcritureFichier();
+		Voyage voyage = creationVoyage.get(0);
+		ecriture.writeTrip(voyage);
+		this.listeVoyages.add(voyage);
 	}
 	
 	public ArrayList<String> resumeVoyage() {
@@ -331,21 +347,11 @@ public class Utilisateur implements Serializable {
 		
 		return res;
 	}
-	
-	public void ecrireVoyage() {
-		EcritureFichier ecriture = new EcritureFichier();
-		Voyage voyage = creationVoyage.get(0);
-		ecriture.writeTrip(voyage);
-		this.listeVoyages.add(voyage);
-	}
-	
-	public ArrayList<Voyage> getVoyages(){
-		return this.listeVoyages;
-	}
+
 	
 	public ArrayList<String> mesVoyages(){
 		ArrayList<String> res = new ArrayList<String>();
-		ArrayList<Voyage> listeVoyages = this.getVoyages();
+		ArrayList<Voyage> listeVoyages = this.listeVoyages;
 		for(int i=0; i<listeVoyages.size(); i++) {
 			res.add(listeVoyages.get(i).getDepart());
 			res.add(listeVoyages.get(i).getArrivee());
