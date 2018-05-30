@@ -5,10 +5,10 @@ import java.io.Serializable;
 
 public class Voyage implements Serializable {
 	
-	private String date;
-	private Integer prix;
-	private ArrayList<Etape> trajet;
-	private Utilisateur conducteur;
+	protected String date;
+	protected Integer prix;
+	protected ArrayList<Etape> trajet;
+	protected Utilisateur conducteur;
 	
 	public Voyage() {} //constructeur par défaut
 	
@@ -210,11 +210,10 @@ public class Voyage implements Serializable {
 	@Override
 	public boolean equals(Object o){
 		Voyage trip = (Voyage)o;
-		
+		//Un voyage est identifié par sa date, son trajet et son conducteur
 		if(this.date.equals(trip.getDate()) &&
 				this.trajet.equals(trip.getTrajet()) &&
-				this.conducteur.equals(trip.getConducteur()) &&
-				this.prix.equals(trip.getPrix()))
+				this.conducteur.equals(trip.getConducteur()))
 			return true;
 		else {
 			return false;

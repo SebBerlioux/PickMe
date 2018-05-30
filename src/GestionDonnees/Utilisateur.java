@@ -16,6 +16,8 @@ public class Utilisateur implements Serializable {
 	private String comportementAuVolant;
 	private ArrayList<Utilisateur> listeNoire;
 	private Integer nbSignalement;
+	protected ArrayList<Voyage> creationVoyage; //liste intermédiaire utilisée lors de la création d'un voyage
+	protected ArrayList<Voyage> listeVoyages;
 
 
 	public Utilisateur(String nom, String prenom, String tel, String email, String mdp, String typeVehicule, String typeConduite, String comportementAuVolant) {
@@ -115,6 +117,91 @@ public class Utilisateur implements Serializable {
 		return res;
 	}
 	
+	public void creerVoyage(String villeD, String date, String heureD, Integer nbPlace) {
+		//on vide la pile utilisée pour la création de voyage
+		while(creationVoyage.size()>0) {
+			creationVoyage.remove(0);
+		}
+		
+		Etape etape1 = new Etape();
+		etape1.villeD = villeD;
+		etape1.villeA = "1ère étape";
+		etape1.heureDepart = heureD;
+		etape1.nbPlace = nbPlace;
+		
+		Voyage voyage = new Voyage();
+		voyage.date = date;
+		voyage.conducteur = this;
+		
+		ArrayList<Etape> trajet = new ArrayList<Etape>();
+		trajet.add(etape1);
+		voyage.trajet = trajet;
+		
+		this.creationVoyage.add(voyage);
+	}
+	
+	public void ajouterEtape(String villeEtape, String heureA, String lieuRdv, Integer prix) {
+		Voyage voyage = creationVoyage.get(0);
+		creationVoyage.remove(0);
+		ArrayList<Etape> trajet = voyage.getTrajet();
+		for(int i=0; i<trajet.size(); i++) {
+			if(trajet.get(i).getVilleA().equals("1ère étape")) {
+				trajet.get(i).villeA = villeEtape;
+				trajet.get(i).heureArriveeVilleA = heureA;
+				trajet.get(i).lieuRdv = lieuRdv;
+				trajet.get(i).prix = prix;
+			}
+			else {
+				Etape etape = new Etape(trajet.get(i).getVilleA(), villeEtape, prix, trajet.get(i).nbPlace, lieuRdv, trajet.get(i).heureArriveeVilleA, heureA);
+				trajet.add(etape);
+			}
+		}
+		voyage.trajet = trajet;
+		creationVoyage.add(voyage);
+	}
+	
+	public ArrayList<String> resumeVoyage() {
+		Voyage voyage = creationVoyage.get(0);
+		ArrayList<String> res = new ArrayList<String>();
+		res.add(voyage.getDate());
+		res.add(voyage.getDepart());
+		res.add(voyage.getArrivee());
+		ArrayList<Etape> trajet = voyage.getTrajet();
+		for(int i=0; i<trajet.size(); i++) {
+			res.add(trajet.get(i).getVilleD());
+			res.add(trajet.get(i).getHeureDepart());
+			res.add(trajet.get(i).getLieuRdv());
+			res.add(Integer.toString(trajet.get(i).getPrix()));
+			res.add(Integer.toString(trajet.get(i).getNbPlace()));
+		}
+		res.add(Integer.toString(voyage.getPrixTotal()));
+		
+		res.add(this.nom);
+		res.add(this.prenom);
+		res.add(this.typeVehicule);
+		res.add(this.typeConduite);
+		res.add(this.comportementAuVolant);
+		
+		return res;
+	}
+	
+	public ArrayList<String> afficherDetailsVoyage(Voyage voyage){
+		ArrayList<String> res = new ArrayList<String>();
+		if(this == voyage.conducteur) { // si l'utilisateur est le conducteur du voyage
+			
+		}
+		else { // si l'utilisateur est un passager du voyage
+			
+		}
+	}
+	
+	public void ecrireVoyage() {
+		EcritureFichier ecriture = new EcritureFichier();
+		Voyage voyage = creationVoyage.get(0);
+		ecriture.writeTrip(voyage);
+		this.listeVoyages.add(voyage);
+	}
+	
 	public void reserver(Voyage voyage, String villeD, String villeA) {
 		
 		ArrayList<Voyage> bdd = new ArrayList<Voyage>(); //liste des voyages présents dans la base de données
@@ -149,16 +236,11 @@ public class Utilisateur implements Serializable {
 	@Override
 	public boolean equals(Object o){
 		Utilisateur user = (Utilisateur)o;
-		if(this.nom.equals(user.getNom()) &&
-				this.prenom.equals(user.getPrenom()) &&
-				this.tel.equals(user.getTel()) &&
-				this.email.equals(user.getEmail()) &&
-				this.mdp.equals(user.getMdp()) &&
-				this.typeVehicule.equals(user.getTypeVehicule()) &&
-				this.typeConduite.equals(user.getTypeConduite()) &&
-				this.comportementAuVolant.equals(user.getComportementAuVolant()) &&
-				this.listeNoire.equals(user.getListeNoire()) &&
-				this.nbSignalement.equals(user.getNbSignalement()))
+		/* Les utilisateurs ont une adresse mail et un numéro de téléphone uniques,
+		 * donc on les identifie par l'un ou l'autre.
+		 */
+		if(this.tel.equals(user.getTel()) ||
+				this.email.equals(user.getEmail()))
 			return true;
 		else {
 			return false;
