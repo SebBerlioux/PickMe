@@ -15,7 +15,7 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableCellRenderer;
 
-public class VueVoyages extends JFrame {
+public class VueVoyages extends JPanel {
 	
 	//VueVoyages
 	public JTable myTable;
@@ -177,7 +177,7 @@ public class VueVoyages extends JFrame {
 		add(panelRight1);
 		add(panelRight2);
 		
-		this.setLayout(new BoxLayout(getContentPane(), BoxLayout.LINE_AXIS));
+		this.setLayout(new BoxLayout(this, BoxLayout.LINE_AXIS));
 	}
 
 	class buttonDetailsRenderer extends JButton implements TableCellRenderer {
