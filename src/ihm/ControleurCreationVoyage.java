@@ -9,14 +9,16 @@ import javax.swing.JButton;
 import javax.swing.JTextField;
 
 import GestionDonnees.Etape;
+import GestionDonnees.Utilisateur;
 import GestionDonnees.Voyage;
 import ihm.MainControler.ActionExit;
 
 public class ControleurCreationVoyage {
 	VueCreationVoyage vue;
 	Voyage voyage;
+	Utilisateur utilisateur;
 	
-	public ControleurCreationVoyage() {
+	public ControleurCreationVoyage(Utilisateur utilisateur) {
 		this.vue = new VueCreationVoyage();
 		this.voyage = new Voyage();
 		
@@ -47,6 +49,7 @@ public class ControleurCreationVoyage {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
+			utilisateur.creerVoyage(vue.boxDepart.getText(), vue.txtFDate1.getText() + "/" + vue.txtFDate2.getText() + "/" + vue.txtFDate3.getText() , vue.txtFDate1.getText() + ":" + vue.txtFHeure2.getText(),Integer.parseInt(vue.txtFPlace.getText()));
 			System.out.println("Création voyage");
 			vue.droite.setVisible(true);
 			vue.gauche.setVisible(false);
@@ -59,20 +62,8 @@ public class ControleurCreationVoyage {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			System.out.println("Ajouter une étape avec lieu de départ : " + vue.txtLieuRdv.getText());
-			
-			//récupération des champs
-			String villeD = vue.boxDepart.getText();
-			String villeA = vue.txtVilleEtape.getText();
-			Integer prix = Integer.parseInt(vue.txtPrix.getText());
-			Integer nbPlace = Integer.parseInt(vue.txtFPlace.getText());
-			String lieuRdv = vue.txtVilleEtape.getText();
-			String heureDepart = vue.txtFDate1.getText() + ":" + vue.txtFHeure2.getText();
-			String heureArriveeVilleA = vue.txtHeure.getText() + ":" + vue.txtMinute.getText();
-			
 			//enregistrement de l'étape
-			Etape etape1 = new Etape(villeD, villeA, prix, nbPlace, lieuRdv, heureDepart, heureArriveeVilleA);
-			System.out.print(etape1.toString());
+			utilisateur.ajouterEtape(vue.txtVilleEtape.getText(), vue.txtHeure.getText() + ":" + vue.txtMinute.getText(), vue.txtVilleEtape.getText(), Integer.parseInt(vue.txtPrix.getText()));
 			
 			//reset des champs
 			vue.txtVilleEtape.setText("");
@@ -88,6 +79,7 @@ public class ControleurCreationVoyage {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
+			utilisateur.ecrireVoyage();
 			vue.droite.setVisible(false);
 			vue.gauche.setVisible(true);
 			vue.boutonSuivant.setVisible(true);
