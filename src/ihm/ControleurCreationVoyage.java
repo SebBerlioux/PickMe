@@ -82,6 +82,9 @@ public class ControleurCreationVoyage {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
+			vue.droite.setVisible(false);
+			vue.gauche.setVisible(true);
+			vue.boutonSuivant.setVisible(true);
 			System.out.println("Terminer");
 		}
 		
