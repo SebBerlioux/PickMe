@@ -17,7 +17,7 @@ public class Utilisateur implements Serializable {
 	private ArrayList<Utilisateur> listeNoire;
 	private Integer nbSignalement;
 	protected ArrayList<Voyage> creationVoyage = new ArrayList<Voyage>(); //liste intermédiaire utilisée lors de la création d'un voyage
-	protected ArrayList<Voyage> listeVoyages;
+	protected ArrayList<Voyage> listeVoyages = new ArrayList<Voyage>();
 
 
 	public Utilisateur(String nom, String prenom, String tel, String email, String mdp, String typeVehicule, String typeConduite, String comportementAuVolant) {
@@ -195,14 +195,33 @@ public class Utilisateur implements Serializable {
 	}
 	
 	public void annulerVoyage(Voyage voyage) {
+		ArrayList<Voyage> bdd = new ArrayList<Voyage>(); //liste des utilisateurs présents dans la base de données
 		
+		//on lit la base de données et on supprime dans la bdd le voyage que l'on va annuler
+		LectureFichier lecture = new LectureFichier();
+		bdd = lecture.readTrip("trips.txt");
+		for(int i=0; i<bdd.size(); i++){
+			if(bdd.get(i).equals(voyage)) {
+				bdd.remove(i);
+			}
+		}
+		
+		//on écrit le voyage (avec son état "Annulé") dans la bdd (en écrasant ce qu'il y a dedans)
+		EcritureFichier ecriture = new EcritureFichier();
+		ecriture.overWriteTrip(voyage);
+		
+		// puis on ajoute au fichier "users.txt" les utilisateurs qui n'ont pas été modifiés
+		for(int i=0; i<bdd.size(); i++){
+			ecriture.writeTrip(bdd.get(i));
+		}
 	}
 	
 	public void ajouterEtape(String villeEtape, String heureA, String lieuRdv, Integer prix) {
 		Voyage voyage = creationVoyage.get(0);
-		creationVoyage.remove(0);
+		creationVoyage.clear();
 		ArrayList<Etape> trajet = voyage.getTrajet();
-		for(int i=0; i<trajet.size(); i++) {
+		int taille = trajet.size();
+		for(int i=0; i<taille; i++) {
 			if(trajet.get(i).getVilleA().equals("1ère étape")) {
 				trajet.get(i).villeA = villeEtape;
 				trajet.get(i).heureArriveeVilleA = heureA;
@@ -294,6 +313,10 @@ public class Utilisateur implements Serializable {
 		Voyage voyage = creationVoyage.get(0);
 		ecriture.writeTrip(voyage);
 		this.listeVoyages.add(voyage);
+	}
+	
+	public ArrayList<Voyage> getVoyages(){
+		return this.listeVoyages;
 	}
 	
 	public void reserver(Voyage voyage, String villeD, String villeA) {
