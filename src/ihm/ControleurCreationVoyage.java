@@ -37,6 +37,12 @@ public class ControleurCreationVoyage {
 		
 	}
 	
+	public void init() {
+		vue.droite.setVisible(false);
+		vue.gauche.setVisible(true);
+		vue.boutonSuivant.setVisible(true);
+	}
+	
 	public class ActionSuivant extends AbstractAction {
 
 		@Override
