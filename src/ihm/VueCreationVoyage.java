@@ -1,8 +1,12 @@
 package ihm;
 
 import javax.swing.JPanel;
+
+import java.awt.Component;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.GridLayout;
+
 import javax.swing.BorderFactory;
 import javax.swing.JTextField;
 import javax.swing.JLabel;
@@ -86,42 +90,18 @@ public class VueCreationVoyage extends JPanel {
 		txtFPlace.setEditable(true);
 
 		//ajout des champs du panel gauche
-		c1.gridx = 0;
-		c1.gridy = 0;
-		gauche.add(depart, c1);
-		c1.gridx = 1;
-		c1.gridy = 0;
-		gauche.add(boxDepart, c1);
-		c1.gridx = 0;
-		c1.gridy = 1;
-		gauche.add(date, c1);
-		c1.gridx = 1;
-		c1.gridy = 1;
-		gauche.add(txtFDate1, c1);
-		c1.gridx = 2;
-		c1.gridy = 1;
-		gauche.add(txtFDate2, c1);
-		c1.gridx = 3;
-		c1.gridy = 1;
-		gauche.add(txtFDate3, c1);
-		c1.gridx = 0;
-		c1.gridy = 2;
-		gauche.add(heureDepart, c1);
-		c1.gridx = 1;
-		c1.gridy = 2;
-		gauche.add(txtFHeure1, c1);
-		c1.gridx = 2;
-		c1.gridy = 2;
-		gauche.add(txtFHeure2, c1);
-		c1.gridx = 0;
-		c1.gridy = 3;
-		gauche.add(nbPlace, c1);
-		c1.gridx = 1;
-		c1.gridy = 3;
-		gauche.add(txtFPlace, c1);
-		c1.gridx = 1;
-		c1.gridy = 4;
-		gauche.add(boutonSuivant, c1);
+		gauche.add(depart);
+		gauche.add(boxDepart);
+		gauche.add(date);
+		gauche.add(txtFDate1);
+		gauche.add(txtFDate2);
+		gauche.add(txtFDate3);
+		gauche.add(heureDepart);
+		gauche.add(txtFHeure1);
+		gauche.add(txtFHeure2);
+		gauche.add(nbPlace);
+		gauche.add(txtFPlace);
+		//gauche.add(boutonSuivant);
 
 
 		//ajout des champs du panel droit
@@ -162,9 +142,10 @@ public class VueCreationVoyage extends JPanel {
 		gauche.setBorder(BorderFactory.createEtchedBorder());
 		droite.setBorder(BorderFactory.createEtchedBorder());
 		
-	//	droite.setVisible(false);
+		droite.setVisible(false);
 
 		this.add(gauche);
+		this.add(boutonSuivant);
 		this.add(droite);
 	}
 }
