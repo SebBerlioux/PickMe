@@ -163,4 +163,9 @@ public class EcritureFichier {
 		}
 	}
 	
+	
+	public void creerUtilisateur(String nom, String prenom, String tel, String email, String mdp, String typeVehicule, String typeConduite, String comportementAuVolant) {
+		Utilisateur user = new Utilisateur(nom, prenom, tel, email, mdp, typeVehicule, typeConduite, comportementAuVolant);
+		writeUser(user);
+	}
 }

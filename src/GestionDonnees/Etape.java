@@ -70,15 +70,9 @@ public class Etape implements Serializable{
 	@Override
 	public boolean equals(Object o){
 		Etape etape = (Etape)o;
-		
+		// Une étape est identifiée par sa ville de départ et sa ville d'arrivée
 		if(this.villeD.equals(etape.getVilleD()) &&
-				this.villeA.equals(etape.getVilleA()) &&
-				this.prix.equals(etape.getPrix()) &&
-				this.nbPlace.equals(etape.getNbPlace()) && 
-				this.lieuRdv.equals(etape.getLieuRdv()) &&
-				this.heureDepart.equals(etape.getHeureDepart()) &&
-				this.heureArriveeVilleA.equals(etape.getHeureArrivee()) &&
-				this.passagers.equals(etape.getPassagers()))
+				this.villeA.equals(etape.getVilleA()))
 			return true;
 		else {
 			return false;
