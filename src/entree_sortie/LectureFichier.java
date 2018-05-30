@@ -7,9 +7,9 @@ import java.util.ArrayList;
 
 public class LectureFichier {
 	
-	public void readUser(String filename) {
+	public ArrayList<Utilisateur> readUser(String filename){
 		
-	    ObjectInputStream ois = null;;
+	    ObjectInputStream ois = null;
 	    FileInputStream fis = null;
 	    BufferedInputStream bis = null;
 	    File file = null;
@@ -28,15 +28,11 @@ public class LectureFichier {
 	      catch(EOFException e) {  
 	      }
 		  
-	      for(Utilisateur user : liste) {
-	    	  System.out.println(user);
-		  }
 	    }
 	    catch (ClassNotFoundException e) {
 	        e.printStackTrace();
 	    }
 	    catch(FileNotFoundException e) {
-	    	e.printStackTrace();
 	    }
 	    catch(IOException e) {
 	    	e.printStackTrace();
@@ -50,11 +46,12 @@ public class LectureFichier {
 	            e.printStackTrace();
 	        }
 	    }
+		return liste;
 	}
 	
-public void readTrip(String filename) {
+public ArrayList<Voyage> readTrip(String filename) {
 		
-	    ObjectInputStream ois = null;;
+	    ObjectInputStream ois = null;
 	    FileInputStream fis = null;
 	    BufferedInputStream bis = null;
 	    File file = null;
@@ -72,16 +69,11 @@ public void readTrip(String filename) {
 	      }
 	      catch(EOFException e) {  
 	      }
-		  
-	      for(Voyage trip : liste) {
-	    	  System.out.println(trip);
-		  }
 	    }
 	    catch (ClassNotFoundException e) {
 	        e.printStackTrace();
 	    }
 	    catch(FileNotFoundException e) {
-	    	e.printStackTrace();
 	    }
 	    catch(IOException e) {
 	    	e.printStackTrace();
@@ -95,5 +87,6 @@ public void readTrip(String filename) {
 	            e.printStackTrace();
 	        }
 	    }
+		return liste;
 	}
 }

@@ -9,7 +9,9 @@ public class Voyage implements Serializable {
 	private Integer prix;
 	private ArrayList<Etape> trajet;
 	private Utilisateur conducteur;
-
+	
+	public Voyage() {} //constructeur par défaut
+	
 	public Voyage(String date, ArrayList<Etape> trajet, Utilisateur conducteur) {
 		this.date = date;
 		this.trajet = trajet;
@@ -28,7 +30,7 @@ public class Voyage implements Serializable {
 	}
 	
 	public String getArrivee() {
-		System.out.println(this.trajet.get(trajet.size()-1).villeA);
+		//System.out.println(this.trajet.get(trajet.size()-1).villeA);
 		return this.trajet.get(trajet.size()-1).villeA;
 	}
 	
@@ -36,8 +38,16 @@ public class Voyage implements Serializable {
 		return this.date;
 	}
 	
+	public ArrayList<Etape> getTrajet(){
+		return this.trajet;
+	}
+	
 	public Utilisateur getConducteur() {
 		return this.conducteur;
+	}
+	
+	public Integer getPrix() {
+		return this.prix;
 	}
 	
 	public Integer getPrixTotal() {
@@ -85,7 +95,7 @@ public class Voyage implements Serializable {
 	 */
 	public void addPassager(Utilisateur user, Etape etapeDepart, Etape etapeArrivee) {
 		int i = 0;
-		Etape tmp = this.trajet.get(0);
+		Etape tmp = this.trajet.get(i);
 		while(tmp != etapeDepart) {
 			i++;
 			tmp = this.trajet.get(i);
@@ -122,6 +132,9 @@ public class Voyage implements Serializable {
 					j++;
 					tmp2 = this.trajet.get(j);
 				}
+				// enfin il faut aussi ajouter le passager sur la dernière étape du trajet
+				tmp2.addPassager(user);
+				tmp2.nbPlace--;
 			}else {
 				tmp2.addPassager(user);
 				tmp2.nbPlace--;
@@ -167,8 +180,45 @@ public class Voyage implements Serializable {
 		return etape.getVilleA();
 	}
 	
+	public ArrayList<Etape> getEtapesDA(String villeD, String villeA){
+		ArrayList<Etape> listeEtapes = new ArrayList<Etape>();
+		int i = 0;
+		Etape tmp = this.trajet.get(i);
+		
+		while(!tmp.getVilleD().equals(villeD)) {
+			i++;
+			tmp = this.trajet.get(i);
+		}
+		// ici on est à la villeD
+		// on ajoute l'étape dans la liste
+		listeEtapes.add(tmp);
+		while(!tmp.getVilleA().equals(villeA)) {
+			tmp = this.trajet.get(i);
+			i++;
+		}
+		// ici on est à la villeA
+		// on ajoute l'étape dans la liste
+		// il se peut qu'on ajoute 2 fois la même étape dans la liste si le trajet contient qu'une seule étape
+		listeEtapes.add(tmp);
+		return listeEtapes;
+	}
+	
 	public String toString(){
-	    return "Date: " + this.date + "\n" + "Trajet: " + this.trajet + "\n" + "Conducteur: " + this.conducteur + "\n" + "Prix: " + this.prix + "\n";
-	  } 
+	    return "Date: " + this.date + "\n" + "Trajet: " + this.trajet + "\n" + "Conducteur: " + this.conducteur + "Prix: " + this.prix + "\n" ;
+	  }
+	
+	@Override
+	public boolean equals(Object o){
+		Voyage trip = (Voyage)o;
+		
+		if(this.date.equals(trip.getDate()) &&
+				this.trajet.equals(trip.getTrajet()) &&
+				this.conducteur.equals(trip.getConducteur()) &&
+				this.prix.equals(trip.getPrix()))
+			return true;
+		else {
+			return false;
+		}
+	}
 
 }

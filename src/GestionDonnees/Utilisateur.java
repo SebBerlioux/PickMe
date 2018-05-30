@@ -1,9 +1,10 @@
 package GestionDonnees;
 
+import entree_sortie.*;
 import java.util.ArrayList;
 import java.io.Serializable;
 
-public class Utilisateur implements Serializable{
+public class Utilisateur implements Serializable {
 	
 	private String nom;
 	private String prenom;
@@ -74,6 +75,10 @@ public class Utilisateur implements Serializable{
 		return this.typeConduite;
 	}
 	
+	public String getComportementAuVolant() {
+		return this.comportementAuVolant;
+	}
+	
 	public ArrayList<Utilisateur> getListeNoire() {
 		return this.listeNoire;
 	}
@@ -91,7 +96,72 @@ public class Utilisateur implements Serializable{
 	}
 	
 	 public String toString(){
-		    return "Nom: " + this.nom + "\n" + "Prenom: " + this.prenom + "\n" + "Tel: " + this.tel + "\n" + "Email: " + this.email + "\n" + "Mdp: " + this.mdp + "\n" + "Type de véhicule: " + this.typeVehicule + "\n" + "Type de conduite: " + this.typeConduite + "\n" + "Comportement au volant: " + this.comportementAuVolant + "\n" + "Liste noire: " + this.listeNoire + "\n" + "Nombre de signalements: " + this.nbSignalement + "\n";
-		  } 
+		    return "Nom: " + this.nom + ", " + "Prenom: " + this.prenom + ", " + "Tel: " + this.tel + ", " + "Email: " + this.email + ", " + "Mdp: " + this.mdp + ", " + "Type de véhicule: " + this.typeVehicule + ", " + "Type de conduite: " + this.typeConduite + ", " + "Comportement au volant: " + this.comportementAuVolant + ", " + "Liste noire: " + this.listeNoire + ", " + "Nombre de signalements: " + this.nbSignalement + "\n";
+		  }
+	 
+	public ArrayList<Voyage> rechercherTrajet(String villeD, String villeA, String date){
+		LectureFichier lecture = new LectureFichier();
+		ArrayList<Voyage> bdd = new ArrayList<Voyage>();
+		ArrayList<Voyage> res = new ArrayList<Voyage>();
+		
+		bdd = lecture.readTrip("trips.txt");
+		
+		for(int i=0; i<bdd.size(); i++){
+
+			if(bdd.get(i).getDate().equals(date) && bdd.get(i).getDepart().equals(villeD) && bdd.get(i).getArrivee().equals(villeA)) {
+				res.add(bdd.get(i));
+			}
+		}
+		return res;
+	}
 	
+	public void reserver(Voyage voyage, String villeD, String villeA) {
+		
+		ArrayList<Voyage> bdd = new ArrayList<Voyage>(); //liste des voyages présents dans la base de données
+		Voyage res = new Voyage(); //voyage à mettre à jour
+		Etape etapeDepart = new Etape();
+		Etape etapeArrivee = new Etape();
+		
+		//on lit la base de données et on récupère le voyage concerné, en le supprimant de la BDD
+		LectureFichier lecture = new LectureFichier();
+		bdd = lecture.readTrip("trips.txt");
+		for(int i=0; i<bdd.size(); i++){
+			if(bdd.get(i).equals(voyage)) {
+				res = bdd.get(i);
+				bdd.remove(i);
+			}
+		}
+		
+		//on ajoute le passager au trajet sur la ou les bonne(s) étape(s)
+		etapeDepart = res.getEtapesDA(villeD, villeA).get(0);
+		etapeArrivee = res.getEtapesDA(villeD, villeA).get(1);
+		res.addPassager(this, etapeDepart, etapeArrivee);
+		
+		// on écrit le voyage modifié dans le "trips.txt" (en écrasant tout ce qu'il y avait)
+		EcritureFichier ecriture = new EcritureFichier();
+		ecriture.overWriteTrip(res);
+		// puis on ajoute au fichier "trips.txt" les voyages qui n'ont pas été modifiés
+		for(int i=0; i<bdd.size(); i++){
+			ecriture.writeTrip(bdd.get(i));
+		}
+	}
+	
+	@Override
+	public boolean equals(Object o){
+		Utilisateur user = (Utilisateur)o;
+		if(this.nom.equals(user.getNom()) &&
+				this.prenom.equals(user.getPrenom()) &&
+				this.tel.equals(user.getTel()) &&
+				this.email.equals(user.getEmail()) &&
+				this.mdp.equals(user.getMdp()) &&
+				this.typeVehicule.equals(user.getTypeVehicule()) &&
+				this.typeConduite.equals(user.getTypeConduite()) &&
+				this.comportementAuVolant.equals(user.getComportementAuVolant()) &&
+				this.listeNoire.equals(user.getListeNoire()) &&
+				this.nbSignalement.equals(user.getNbSignalement()))
+			return true;
+		else {
+			return false;
+		}
+	}
 }
