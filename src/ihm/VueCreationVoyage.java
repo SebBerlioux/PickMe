@@ -62,7 +62,7 @@ public class VueCreationVoyage extends JPanel {
 		this.txtFHeure1 = new JTextField(2);
 		this.txtFHeure2 = new JTextField(2);
 		this.txtFPlace = new JTextField(2);
-		this.boutonSuivant = new JButton("Suivant");
+		this.boutonSuivant = new JButton();
 
 		//panel droite
 		this.villeEtape = new JLabel("Ville étape: ");
@@ -162,7 +162,7 @@ public class VueCreationVoyage extends JPanel {
 		gauche.setBorder(BorderFactory.createEtchedBorder());
 		droite.setBorder(BorderFactory.createEtchedBorder());
 		
-		droite.setVisible(false);
+	//	droite.setVisible(false);
 
 		this.add(gauche);
 		this.add(droite);
