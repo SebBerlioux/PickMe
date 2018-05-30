@@ -56,37 +56,39 @@ public class VueRechercherVoyage extends JPanel{
 			//ajout des champs du panel gauche
 			c1.gridx = 0;
 			c1.gridy = 0;
-			gauche.add(depart, c1);
+			gauche.add(depart);
 			c1.gridx = 1;
 			c1.gridy = 0;
-			gauche.add(txtDepart, c1);
+			gauche.add(txtDepart);
 			c1.gridx = 0;
 			c1.gridy = 1;
-			gauche.add(destination, c1);
+			gauche.add(destination);
 			c1.gridx = 1;
 			c1.gridy = 1;
-			gauche.add(txtDestination, c1);
+			gauche.add(txtDestination);
 			c1.gridx = 0;
 			c1.gridy = 2;
-			gauche.add(date, c1);
+			gauche.add(date);
 			c1.gridx = 1;
 			c1.gridy = 2;
-			gauche.add(txtDateJour, c1);
+			gauche.add(txtDateJour);
 			c1.gridx = 2;
 			c1.gridy = 2;
-			gauche.add(txtDateMois, c1);
+			gauche.add(txtDateMois);
 			c1.gridx = 3;
 			c1.gridy = 2;
-			gauche.add(txtDateAnnee, c1);
+			gauche.add(txtDateAnnee);
 			c1.gridx = 1;
 			c1.gridy = 3;
-			gauche.add(boutonRechercher, c1);
-			
+			//gauche.add(boutonRechercher);
 			
 			gauche.setBorder(BorderFactory.createEtchedBorder());
 			droite.setBorder(BorderFactory.createEtchedBorder());
 			
+			droite.setVisible(false);
+			
 			this.add(gauche);
+			this.add(boutonRechercher);
 			this.add(droite);
 		}
 }
