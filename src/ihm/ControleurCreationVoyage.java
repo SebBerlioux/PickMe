@@ -64,7 +64,7 @@ public class ControleurCreationVoyage {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			//enregistrement de l'étape
-			utilisateur.ajouterEtape(vue.txtVilleEtape.getText(), vue.txtHeure.getText() + ":" + vue.txtMinute.getText(), vue.txtVilleEtape.getText(), Integer.parseInt(vue.txtPrix.getText()));
+			utilisateur.ajouterEtape(vue.txtVilleEtape.getText(), vue.txtHeure.getText() + ":" + vue.txtMinute.getText(), vue.txtLieuRdv.getText(), Integer.parseInt(vue.txtPrix.getText()));
 			
 			//reset des champs
 			vue.txtVilleEtape.setText("");

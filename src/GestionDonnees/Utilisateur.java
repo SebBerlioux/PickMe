@@ -16,8 +16,8 @@ public class Utilisateur implements Serializable {
 	private String comportementAuVolant;
 	private ArrayList<Utilisateur> listeNoire;
 	private Integer nbSignalement;
-	protected ArrayList<Voyage> creationVoyage = new ArrayList<Voyage>(); //liste intermédiaire utilisée lors de la création d'un voyage
-	protected ArrayList<Voyage> listeVoyages;
+	private ArrayList<Voyage> creationVoyage; //liste intermédiaire utilisée lors de la création d'un voyage
+	private ArrayList<Voyage> listeVoyages;
 
 
 	public Utilisateur(String nom, String prenom, String tel, String email, String mdp, String typeVehicule, String typeConduite, String comportementAuVolant) {
@@ -32,6 +32,7 @@ public class Utilisateur implements Serializable {
 		this.listeNoire = new ArrayList<Utilisateur>();
 		this.nbSignalement = 0;
 		this.listeVoyages = new ArrayList<Voyage>();
+		this.creationVoyage = new ArrayList<Voyage>();
 	}
 	
 	/*public void newUtilisateur(Utilisateur user) {
@@ -88,6 +89,10 @@ public class Utilisateur implements Serializable {
 	
 	public Integer getNbSignalement() {
 		return this.nbSignalement;
+	}
+	
+	public ArrayList<Voyage> getListeVoyages(){
+		return this.listeVoyages;
 	}
 	
 	public void ajoutListeNoire(Utilisateur user) {
@@ -242,8 +247,6 @@ public class Utilisateur implements Serializable {
 		trajet.add(etape1);
 		voyage.trajet = trajet;
 		
-		System.out.println(voyage);
-		
 		this.creationVoyage.add(voyage);
 	}
 	
@@ -252,33 +255,56 @@ public class Utilisateur implements Serializable {
 		Voyage voyage = this.creationVoyage.get(0);
 		this.creationVoyage.clear();
 		ArrayList<Etape> trajet = voyage.getTrajet();
-		int taille = trajet.size();
-		for(int i=0; i<taille; i++) {
-			if(trajet.get(i).getVilleA().equals("1ère étape")) {
-				trajet.get(i).villeA = villeEtape;
-				trajet.get(i).heureArriveeVilleA = heureA;
-				trajet.get(i).lieuRdv = lieuRdv;
-				trajet.get(i).prix = prix;
-			}
-			else {
-				Etape etape = new Etape(trajet.get(i).getVilleA(), villeEtape, prix, trajet.get(i).nbPlace, lieuRdv, trajet.get(i).heureArriveeVilleA, heureA);
-				trajet.add(etape);
-			}
-			voyage.prix = voyage.prix + trajet.get(i).prix;
+		Etape etape = trajet.get(trajet.size()-1);
+		System.out.println(etape);
+
+		if(etape.getVilleA().equals("1ère étape")) {
+			etape.villeA = villeEtape;
+			etape.heureArriveeVilleA = heureA;
+			etape.lieuRdv = lieuRdv;
+			etape.prix = prix;
 		}
-		voyage.trajet = trajet;
+		else {
+			Etape etape1 = new Etape(etape.getVilleA(), villeEtape, prix, etape.nbPlace, lieuRdv, etape.heureArriveeVilleA, heureA);
+			trajet.add(etape1);
+			voyage.trajet = trajet;
+		}
+		voyage.prix += prix;
+		
+		System.out.println("prix: " + voyage.prix);
+		System.out.println("trajet: " + trajet);
 		this.creationVoyage.add(voyage);
 	}
 	
 	public void ecrireVoyage() {
 		EcritureFichier ecriture = new EcritureFichier();
-		Voyage voyage = new Voyage();
-		voyage = creationVoyage.get(0);
+		Voyage voyage = creationVoyage.get(0);
+		listeVoyages.add(voyage);
+		System.out.println("liste voyages: "+listeVoyages);
 		ecriture.writeTrip(voyage);
-		ecrireVoyageUser(voyage);
+		ecrireVoyageUser();
 	}
 	
-	public void ecrireVoyageUser(Voyage voyage) {
+	public Integer getNbVoyages(){
+		return this.listeVoyages.size();
+	}
+	
+	public ArrayList<String> mesVoyages(){ //renvoie toutes les caractéristiques de tous les voyages
+		ArrayList<String> res = new ArrayList<String>();
+		
+		for(int i=0; i<listeVoyages.size(); i++) {
+			res.add(listeVoyages.get(i).getDepart());
+			res.add(listeVoyages.get(i).getArrivee());
+			res.add(listeVoyages.get(i).getDate());
+			res.add(listeVoyages.get(i).getConducteur().getNom());
+			res.add(listeVoyages.get(i).getConducteur().getPrenom());
+			res.add(Integer.toString(listeVoyages.get(i).getPrix()));
+			res.add(listeVoyages.get(i).getEtat());
+		}
+		return res;
+	}
+	
+	public void ecrireVoyageUser() {
 		ArrayList<Utilisateur> bdd = new ArrayList<Utilisateur>(); //liste des utilisateurs présents dans la base de données
 		
 		//on lit la base de données et on supprime dans la bdd l'utilisateur que l'on va modifier
@@ -290,8 +316,7 @@ public class Utilisateur implements Serializable {
 			}
 		}
 		
-		//on ajoute à l'utilisateur un voyage dans la bdd (en écrasant ce qu'il y a dedans)
-		this.listeVoyages.add(voyage);
+		//on écrit l'utilisateur dans la bdd (en écrasant ce qu'il y a dedans)
 		EcritureFichier ecriture = new EcritureFichier();
 		ecriture.overWriteUser(this);
 		
@@ -315,7 +340,7 @@ public class Utilisateur implements Serializable {
 			res.add(Integer.toString(trajet.get(i).getPrix()));
 			res.add(Integer.toString(trajet.get(i).getNbPlace()));
 		}
-		res.add(Integer.toString(voyage.getPrixTotal()));
+		res.add(Integer.toString(voyage.getPrix()));
 		
 		res.add(this.nom);
 		res.add(this.prenom);
@@ -360,7 +385,7 @@ public class Utilisateur implements Serializable {
 				res.add(Integer.toString(trajet.get(i).getPrix()));
 			}
 			res.add(trajet.get(trajet.size()-1).getHeureArrivee());
-			res.add(Integer.toString(voyage.getPrixTotal()));
+			res.add(Integer.toString(voyage.getPrix()));
 			res.add(voyage.getConducteur().getNom());
 			res.add(voyage.getConducteur().getPrenom());
 			res.add(voyage.getConducteur().getTel());
@@ -372,22 +397,6 @@ public class Utilisateur implements Serializable {
 		return res;
 	}
 
-	
-	public ArrayList<String> mesVoyages(){
-		ArrayList<String> res = new ArrayList<String>();
-		ArrayList<Voyage> listeVoyages = this.creationVoyage;
-		System.out.println(creationVoyage);
-		for(int i=0; i<listeVoyages.size(); i++) {
-			res.add(listeVoyages.get(i).getDepart());
-			res.add(listeVoyages.get(i).getArrivee());
-			res.add(listeVoyages.get(i).getDate());
-			res.add(listeVoyages.get(i).getConducteur().getNom());
-			res.add(listeVoyages.get(i).getConducteur().getPrenom());
-			res.add(Integer.toString(listeVoyages.get(i).getPrixTotal()));
-			res.add(listeVoyages.get(i).getEtat());
-		}
-		return res;
-	}
 	
 	public void reserver(Voyage voyage, String villeD, String villeA) {
 		

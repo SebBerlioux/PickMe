@@ -64,7 +64,7 @@ public class Etape implements Serializable{
 	}
 	
 	public String toString(){
-	    return "Ville de départ: " + this.villeD + ", " + "Ville d'arrivée: " + this.villeA + ", " + "Prix: " + this.prix + ", " + "Nombre de places: " + this.nbPlace + ", " + "Lieu de rendez-vous: " + this.lieuRdv + ", " + "Heure de départ: " + this.heureDepart + ", " + "Heure d'arrivée: " + this.heureArriveeVilleA + ", " + "Passagers: " + this.passagers;
+	    return "[Ville de départ: " + this.villeD + ", " + "Ville d'arrivée: " + this.villeA + ", " + "Prix: " + this.prix + ", " + "Nombre de places: " + this.nbPlace + ", " + "Lieu de rendez-vous: " + this.lieuRdv + ", " + "Heure de départ: " + this.heureDepart + ", " + "Heure d'arrivée: " + this.heureArriveeVilleA + ", " + "Passagers: " + this.passagers + "]";
 	  }
 	
 	@Override

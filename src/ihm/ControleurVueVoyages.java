@@ -15,15 +15,16 @@ public class ControleurVueVoyages {
 	public ControleurVueVoyages(Utilisateur utilisateur) {
 		this.utilisateur = utilisateur;
 		ArrayList<String> voyages = utilisateur.mesVoyages();
+		Integer nbVoyages = utilisateur.getNbVoyages();
 
-		Object[][] data = new Object [voyages.size()][5];
+		Object[][] data = new Object [nbVoyages][5];
 		
-		for(int i =0; i < utilisateur.mesVoyages().size(); i++) {
-			   data[i][0] = voyages.get(0) + ">" + voyages.get(1);
-			   data[i][1] = voyages.get(2);
-			   data[i][2] = voyages.get(3) + " " + voyages.get(4);
-			   data[i][3] = voyages.get(5);
-			   data[i][4] = voyages.get(6);
+		for(int i =0; i < nbVoyages; i++) {
+				   data[i][0] = voyages.get(0+i*7) + ">" + voyages.get(1+i*7);
+				   data[i][1] = voyages.get(2+i*7);
+				   data[i][2] = voyages.get(3+i*7) + " " + voyages.get(4+i*7);
+				   data[i][3] = voyages.get(5+i*7);
+				   data[i][4] = voyages.get(6+i*7);
 		}
 		
 		this.vue = new VueVoyages(data);

@@ -24,7 +24,7 @@ public class Voyage implements Serializable {
 	public void getVoyage() {
 		System.out.println("Voyage du " + this.date + " :");
 		System.out.println("De " + this.trajet.get(0).villeD + " vers " + this.trajet.get(this.trajet.size()-1).villeA);
-		System.out.println("Prix: " + getPrixTotal() + "€");
+		System.out.println("Prix: " + getPrix() + "€");
 	}
 	
 	public String getDepart() {
@@ -53,13 +53,6 @@ public class Voyage implements Serializable {
 	}
 	
 	public Integer getPrix() {
-		return this.prix;
-	}
-	
-	public Integer getPrixTotal() {
-		for(Etape etape : this.trajet) {
-			this.prix = this.prix + etape.prix;
-		}
 		return this.prix;
 	}
 	
