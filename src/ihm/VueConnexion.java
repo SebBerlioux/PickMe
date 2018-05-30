@@ -15,6 +15,8 @@ public class VueConnexion extends JFrame {
 	public JButton boutonInscription, boutonConnexion;
 	
 	public VueConnexion() {
+		JPanel panel = new JPanel();
+		
 		JPanel paneltop = new JPanel();
 		JPanel panelbot = new JPanel();
 		
@@ -38,13 +40,15 @@ public class VueConnexion extends JFrame {
 		panelButton.add(boutonInscription);
 		panelButton.setLayout(new BoxLayout(panelButton, BoxLayout.X_AXIS));
 		
-		this.add(panelButton);
-		this.add(paneltop);
-		this.add(panelbot);
+		panel.add(paneltop);
+		panel.add(panelbot);
+		panel.add(panelButton);
 		
-		//setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
+		add(panel);
+		
+		//setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 		this.setTitle("PickMe - Connexion");
-		this.setSize(400, 400);
+		this.setSize(400, 200);
 		this.setVisible(true);
 	}
 	
