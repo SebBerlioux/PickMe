@@ -49,7 +49,7 @@ public class LectureFichier {
 		return liste;
 	}
 	
-public ArrayList<Voyage> readTrip(String filename) {
+	public ArrayList<Voyage> readTrip(String filename) {
 		
 	    ObjectInputStream ois = null;
 	    FileInputStream fis = null;
@@ -89,4 +89,6 @@ public ArrayList<Voyage> readTrip(String filename) {
 	    }
 		return liste;
 	}
+
 }
+

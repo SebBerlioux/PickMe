@@ -90,11 +90,49 @@ public class Utilisateur implements Serializable {
 	}
 	
 	public void ajoutListeNoire(Utilisateur user) {
+		ArrayList<Utilisateur> bdd = new ArrayList<Utilisateur>(); //liste des utilisateurs présents dans la base de données
+		
+		//on lit la base de données et on supprime de la bdd l'utilisateur que l'on va modifier
+		LectureFichier lecture = new LectureFichier();
+		bdd = lecture.readUser("users.txt");
+		for(int i=0; i<bdd.size(); i++){
+			if(bdd.get(i).equals(this)) {
+				bdd.remove(i);
+			}
+		}
+		
+		//on modifie le user puis on le réécrie dans la bdd (en écrasant ce qu'il y a dedans)
 		this.listeNoire.add(user);
+		EcritureFichier ecriture = new EcritureFichier();
+		ecriture.overWriteUser(this);
+		
+		// puis on ajoute au fichier "users.txt" les utilisateurs qui n'ont pas été modifiés
+		for(int i=0; i<bdd.size(); i++){
+			ecriture.writeUser(bdd.get(i));
+		}
 	}
 	
-	public void ajoutSignalement() {
-		this.nbSignalement = this.nbSignalement+1;
+	public void ajoutSignalement(Utilisateur user) {
+		ArrayList<Utilisateur> bdd = new ArrayList<Utilisateur>(); //liste des utilisateurs présents dans la base de données
+		
+		//on lit la base de données et on supprime dans la bdd l'utilisateur que l'on va modifier
+		LectureFichier lecture = new LectureFichier();
+		bdd = lecture.readUser("users.txt");
+		for(int i=0; i<bdd.size(); i++){
+			if(bdd.get(i).equals(user)) {
+				bdd.remove(i);
+			}
+		}
+		
+		//on modifie le user puis on le réécrie dans la bdd (en écrasant ce qu'il y a dedans)
+		user.nbSignalement = user.nbSignalement+1;
+		EcritureFichier ecriture = new EcritureFichier();
+		ecriture.overWriteUser(user);
+		
+		// puis on ajoute au fichier "users.txt" les utilisateurs qui n'ont pas été modifiés
+		for(int i=0; i<bdd.size(); i++){
+			ecriture.writeUser(bdd.get(i));
+		}
 	}
 	
 	 public String toString(){
@@ -188,11 +226,47 @@ public class Utilisateur implements Serializable {
 	public ArrayList<String> afficherDetailsVoyage(Voyage voyage){
 		ArrayList<String> res = new ArrayList<String>();
 		if(this == voyage.conducteur) { // si l'utilisateur est le conducteur du voyage
+			ArrayList<Etape> trajet = voyage.getTrajet();
+			ArrayList<Utilisateur> listePassagers = voyage.getPassagers();
+			for(int i=0; i<listePassagers.size(); i++) {
+				res.add(listePassagers.get(i).getNom());
+				res.add(listePassagers.get(i).getPrenom());
+				res.add(listePassagers.get(i).getTel());
+			}
 			
+			for(int i=0; i<trajet.size(); i++) {
+					for(int j=0; j<trajet.get(i).getPassagers().size(); j++) {
+						for(int k=0; k<listePassagers.size(); k++) {
+							if(trajet.get(i).getPassagers().get(j).equals(listePassagers.get(k))){
+								res.add(trajet.get(i).getVilleD());
+								res.add(trajet.get(i).getHeureDepart());
+								res.add(trajet.get(i).getVilleA());
+								res.add(trajet.get(i).getHeureArrivee());
+							}
+						}
+					}
+			}
 		}
+		
 		else { // si l'utilisateur est un passager du voyage
-			
+			ArrayList<Etape> trajet = voyage.getTrajet();
+			res.add(trajet.get(0).getHeureDepart());
+			for(int i=0; i<trajet.size(); i++) {
+				res.add(trajet.get(i).getVilleD());
+				res.add(trajet.get(i).getHeureDepart());
+				res.add(Integer.toString(trajet.get(i).getPrix()));
+			}
+			res.add(trajet.get(trajet.size()-1).getHeureArrivee());
+			res.add(Integer.toString(voyage.getPrixTotal()));
+			res.add(voyage.getConducteur().getNom());
+			res.add(voyage.getConducteur().getPrenom());
+			res.add(voyage.getConducteur().getTel());
+			res.add(voyage.getConducteur().getTypeVehicule());
+			res.add(voyage.getConducteur().getTypeConduite());
+			res.add(voyage.getConducteur().getComportementAuVolant());
 		}
+		
+		return res;
 	}
 	
 	public void ecrireVoyage() {

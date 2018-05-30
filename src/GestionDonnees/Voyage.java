@@ -163,13 +163,15 @@ public class Voyage implements Serializable {
 		}
 	}
 	
-	// Affiche les passagers d'un voyage
-	public void getPassagers() {
+	// Renvoie une liste avec le nom, le prénom et le numéro de téléphone des passagers d'un voyage
+	public ArrayList<Utilisateur> getPassagers() {
+		ArrayList<Utilisateur> res = new ArrayList<Utilisateur>();
 		for(int i = 0; i<this.trajet.size(); i++) {
 			for(int j = 0; j<this.trajet.get(i).passagers.size(); j++) {
-				System.out.println(this.trajet.get(i).passagers.get(j).getNom());
+				res.add(this.trajet.get(i).passagers.get(j));
 			}
 		}
+		return res;
 	}
 	
 	public String getEtapeDepart(Etape etape) {
