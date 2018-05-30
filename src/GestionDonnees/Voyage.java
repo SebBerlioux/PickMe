@@ -9,6 +9,7 @@ public class Voyage implements Serializable {
 	protected Integer prix;
 	protected ArrayList<Etape> trajet;
 	protected Utilisateur conducteur;
+	protected String etat;
 	
 	public Voyage() {} //constructeur par défaut
 	
@@ -17,6 +18,7 @@ public class Voyage implements Serializable {
 		this.trajet = trajet;
 		this.conducteur = conducteur;
 		this.prix = 0;
+		this.etat = "A venir";
 	}
 	
 	public void getVoyage() {

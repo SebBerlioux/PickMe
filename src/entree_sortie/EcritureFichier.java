@@ -168,4 +168,5 @@ public class EcritureFichier {
 		Utilisateur user = new Utilisateur(nom, prenom, tel, email, mdp, typeVehicule, typeConduite, comportementAuVolant);
 		writeUser(user);
 	}
+	
 }

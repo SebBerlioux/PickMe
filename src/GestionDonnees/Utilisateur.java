@@ -16,7 +16,7 @@ public class Utilisateur implements Serializable {
 	private String comportementAuVolant;
 	private ArrayList<Utilisateur> listeNoire;
 	private Integer nbSignalement;
-	protected ArrayList<Voyage> creationVoyage; //liste intermédiaire utilisée lors de la création d'un voyage
+	protected ArrayList<Voyage> creationVoyage = new ArrayList<Voyage>(); //liste intermédiaire utilisée lors de la création d'un voyage
 	protected ArrayList<Voyage> listeVoyages;
 
 
@@ -90,9 +90,21 @@ public class Utilisateur implements Serializable {
 	}
 	
 	public void ajoutListeNoire(Utilisateur user) {
+		this.listeNoire.add(user);
+	}
+	
+	public void supprimerListeNoire(Utilisateur user) {
+		for(int i=0; i<this.listeNoire.size(); i++) {
+			if(listeNoire.get(i).equals(user)) {
+				listeNoire.remove(i);
+			}
+		}
+	}
+	
+	public void ecrireListeNoire(ArrayList<Utilisateur> listeUser) {
 		ArrayList<Utilisateur> bdd = new ArrayList<Utilisateur>(); //liste des utilisateurs présents dans la base de données
 		
-		//on lit la base de données et on supprime de la bdd l'utilisateur que l'on va modifier
+		//on lit la base de données et on supprime de la bdd l'utilisateur que a été modifié
 		LectureFichier lecture = new LectureFichier();
 		bdd = lecture.readUser("users.txt");
 		for(int i=0; i<bdd.size(); i++){
@@ -101,11 +113,10 @@ public class Utilisateur implements Serializable {
 			}
 		}
 		
-		//on modifie le user puis on le réécrie dans la bdd (en écrasant ce qu'il y a dedans)
-		this.listeNoire.add(user);
+		//on écrit le user (avec sa nouvelle liste noire) dans la bdd (en écrasant ce qu'il y a dedans)
 		EcritureFichier ecriture = new EcritureFichier();
 		ecriture.overWriteUser(this);
-		
+
 		// puis on ajoute au fichier "users.txt" les utilisateurs qui n'ont pas été modifiés
 		for(int i=0; i<bdd.size(); i++){
 			ecriture.writeUser(bdd.get(i));
@@ -113,6 +124,14 @@ public class Utilisateur implements Serializable {
 	}
 	
 	public void ajoutSignalement(Utilisateur user) {
+		user.nbSignalement = user.nbSignalement+1;
+	}
+	
+	public void supprimerSignalement(Utilisateur user) {
+		user.nbSignalement = user.nbSignalement-1;
+	}
+	
+	public void ecrireSignalement(Utilisateur user) {
 		ArrayList<Utilisateur> bdd = new ArrayList<Utilisateur>(); //liste des utilisateurs présents dans la base de données
 		
 		//on lit la base de données et on supprime dans la bdd l'utilisateur que l'on va modifier
@@ -124,8 +143,7 @@ public class Utilisateur implements Serializable {
 			}
 		}
 		
-		//on modifie le user puis on le réécrie dans la bdd (en écrasant ce qu'il y a dedans)
-		user.nbSignalement = user.nbSignalement+1;
+		//on écrit le user (avec son nouveau nombre de signalements) dans la bdd (en écrasant ce qu'il y a dedans)
 		EcritureFichier ecriture = new EcritureFichier();
 		ecriture.overWriteUser(user);
 		
@@ -157,9 +175,7 @@ public class Utilisateur implements Serializable {
 	
 	public void creerVoyage(String villeD, String date, String heureD, Integer nbPlace) {
 		//on vide la pile utilisée pour la création de voyage
-		while(creationVoyage.size()>0) {
-			creationVoyage.remove(0);
-		}
+		creationVoyage.clear();
 		
 		Etape etape1 = new Etape();
 		etape1.villeD = villeD;
@@ -176,6 +192,10 @@ public class Utilisateur implements Serializable {
 		voyage.trajet = trajet;
 		
 		this.creationVoyage.add(voyage);
+	}
+	
+	public void annulerVoyage(Voyage voyage) {
+		
 	}
 	
 	public void ajouterEtape(String villeEtape, String heureA, String lieuRdv, Integer prix) {
