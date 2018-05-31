@@ -7,9 +7,11 @@ import javax.swing.AbstractAction;
 
 public class ControleurSousVueRechercherVoyage {
 	SousVueRechercherVoyage vue;
+	ModelSousVueRechercher model;
 
-	public ControleurSousVueRechercherVoyage() {
+	public ControleurSousVueRechercherVoyage(ModelSousVueRechercher model) {
 		this.vue = new SousVueRechercherVoyage();
+		this.model = model;
 	}
 
 	public class ActionReserver extends AbstractAction{

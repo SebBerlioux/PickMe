@@ -1,11 +1,15 @@
 package ihm;
 
 import java.awt.event.ActionEvent;
+import java.util.ArrayList;
+import java.util.Observable;
+import java.util.Observer;
+
 import javax.swing.AbstractAction;
 
 import GestionDonnees.Utilisateur;
 
-public class MainControler {
+public class MainControler{
 	Utilisateur utilisateur;
 	MainView mainView;
 	ControleurRechercherVoyage controleurRechercherVoyage;
@@ -26,7 +30,7 @@ public class MainControler {
 		
 		
 		//Ajout de toutes les vues des controleurs et les lier au cardlayout
-		controleurRechercherVoyage = new ControleurRechercherVoyage(utilisateur);
+		controleurRechercherVoyage = new ControleurRechercherVoyage();
 		controleurCreationVoyage = new ControleurCreationVoyage(utilisateur);
 		controleurVueVoyages = new ControleurVueVoyages(utilisateur);
 		this.mainView.pane.add(controleurRechercherVoyage.vue,"Rechercher voyage");
