@@ -3,6 +3,10 @@ package GestionDonnees;
 import java.util.ArrayList;
 import java.io.Serializable;
 
+/**
+ * @author Romain
+ *
+ */
 public class Voyage implements Serializable {
 	
 	protected String date;
@@ -13,6 +17,11 @@ public class Voyage implements Serializable {
 	
 	public Voyage() {} //constructeur par défaut
 	
+	/**
+	 * @param date
+	 * @param trajet
+	 * @param conducteur
+	 */
 	public Voyage(String date, ArrayList<Etape> trajet, Utilisateur conducteur) {
 		this.date = date;
 		this.trajet = trajet;
@@ -56,10 +65,19 @@ public class Voyage implements Serializable {
 		return this.prix;
 	}
 	
+	/**
+	 * @param etape
+	 * @return prix etape
+	 */
 	public Integer getPrixEtape(Etape etape) {
 		return etape.prix;
 	}
 	
+	/**
+	 * @param villeD
+	 * @param villeA
+	 * @return prix voyage
+	 */
 	public Integer getPrix(String villeD, String villeA) {
 		Integer res = 0;
 		Etape tmp = this.trajet.get(0);
@@ -79,6 +97,9 @@ public class Voyage implements Serializable {
 		return res;
 	}
 	
+	/**
+	 * @return nombre de places minimum
+	 */
 	public Integer getNbPlacesMinimum() {
 		Integer mini = 20;
 		for(Etape etape : this.trajet) {
@@ -90,7 +111,10 @@ public class Voyage implements Serializable {
 	}
 	
 	
-	/*
+	/**
+	 * @param user
+	 * @param etapeDepart
+	 * @param etapeArrivee
 	 * Ajoute un passager sur toutes les étapes de son trajet.
 	 * On fournit en paramètre l'utilisateur ainsi que son étape de départ et d'arrivée
 	 */
@@ -147,8 +171,9 @@ public class Voyage implements Serializable {
 		}
 	}
 	
-	/*
-	 * supprime un utilisateur de tous les trajets
+	/**
+	 * @param user
+	 * * supprime un utilisateur de tous les trajets
 	 */
 	public void removePassager(Utilisateur user) {
 		for(int i = 0; i<this.trajet.size(); i++) {
@@ -164,7 +189,11 @@ public class Voyage implements Serializable {
 		}
 	}
 	
-	// Renvoie une liste avec le nom, le prénom et le numéro de téléphone des passagers d'un voyage
+
+	/**
+	 * @return une liste avec le nom, le prénom et le numéro de téléphone des passagers d'un voyage
+	 * 
+	 */
 	public ArrayList<Utilisateur> getPassagers() {
 		ArrayList<Utilisateur> res = new ArrayList<Utilisateur>();
 		for(int i = 0; i<this.trajet.size(); i++) {
@@ -175,14 +204,27 @@ public class Voyage implements Serializable {
 		return res;
 	}
 	
+	/**
+	 * @param etape
+	 * @return ville de départ
+	 */
 	public String getEtapeDepart(Etape etape) {
 		return etape.getVilleD();
 	}
 	
+	/**
+	 * @param etape
+	 * @return ville d'arrivée
+	 */
 	public String getEtapeArrivee(Etape etape) {
 		return etape.getVilleA();
 	}
 	
+	/**
+	 * @param villeD
+	 * @param villeA
+	 * @return les etapes qui contiennent villeD ou villeA
+	 */
 	public ArrayList<Etape> getEtapesDA(String villeD, String villeA){
 		ArrayList<Etape> listeEtapes = new ArrayList<Etape>();
 		int i = 0;

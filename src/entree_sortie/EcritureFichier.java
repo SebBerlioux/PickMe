@@ -4,8 +4,15 @@ import GestionDonnees.*;
 import java.io.*;
 import java.util.ArrayList;
 
+/**
+ * @author Romain
+ *
+ */
 public class EcritureFichier {
 	
+	/**
+	 * @param user
+	 */
 	public void writeUser(Utilisateur user){
 		
 		boolean b = true;
@@ -57,6 +64,9 @@ public class EcritureFichier {
 
 	}
 	
+	/**
+	 * @param user
+	 */
 	public void overWriteUser(Utilisateur user){
 		
 		ObjectOutputStream oos = null;
@@ -85,6 +95,9 @@ public class EcritureFichier {
 		}
 	}
 	
+	/**
+	 * @param trip
+	 */
 	public void writeTrip(Voyage trip){
 		
 		boolean b = true;
@@ -135,6 +148,9 @@ public class EcritureFichier {
 		}
 	}
 	
+	/**
+	 * @param trip
+	 */
 	public void overWriteTrip(Voyage trip){
 		
 		ObjectOutputStream oos = null;
@@ -164,6 +180,16 @@ public class EcritureFichier {
 	}
 	
 	
+	/**
+	 * @param nom
+	 * @param prenom
+	 * @param tel
+	 * @param email
+	 * @param mdp
+	 * @param typeVehicule
+	 * @param typeConduite
+	 * @param comportementAuVolant
+	 */
 	public void creerUtilisateur(String nom, String prenom, String tel, String email, String mdp, String typeVehicule, String typeConduite, String comportementAuVolant) {
 		Utilisateur user = new Utilisateur(nom, prenom, tel, email, mdp, typeVehicule, typeConduite, comportementAuVolant);
 		writeUser(user);

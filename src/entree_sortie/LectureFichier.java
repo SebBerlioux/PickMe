@@ -5,8 +5,16 @@ import GestionDonnees.*;
 import java.io.*;
 import java.util.ArrayList;
 
+/**
+ * @author Romain
+ *
+ */
 public class LectureFichier {
 	
+	/**
+	 * @param filename
+	 * @return liste des utilisateurs dans la base de données
+	 */
 	public ArrayList<Utilisateur> readUser(String filename){
 		
 	    ObjectInputStream ois = null;
@@ -49,6 +57,10 @@ public class LectureFichier {
 		return liste;
 	}
 	
+	/**
+	 * @param filename
+	 * @return liste des voyages dans la base de données
+	 */
 	public ArrayList<Voyage> readTrip(String filename) {
 		
 	    ObjectInputStream ois = null;

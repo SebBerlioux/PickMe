@@ -5,6 +5,10 @@ import java.util.ArrayList;
 import java.util.Observable;
 import java.io.Serializable;
 
+/**
+ * @author Romain, Sébastien
+ *
+ */
 public class Utilisateur extends Observable implements Serializable {
 	
 	private String nom;
@@ -21,6 +25,16 @@ public class Utilisateur extends Observable implements Serializable {
 	private ArrayList<Voyage> listeVoyages;
 
 
+	/**
+	 * @param nom
+	 * @param prenom
+	 * @param tel
+	 * @param email
+	 * @param mdp
+	 * @param typeVehicule
+	 * @param typeConduite
+	 * @param comportementAuVolant
+	 */
 	public Utilisateur(String nom, String prenom, String tel, String email, String mdp, String typeVehicule, String typeConduite, String comportementAuVolant) {
 		this.nom = nom;
 		this.prenom = prenom;
@@ -93,10 +107,16 @@ public class Utilisateur extends Observable implements Serializable {
 		return this.listeVoyages;
 	}
 	
+	/**
+	 * @param user
+	 */
 	public void ajoutListeNoire(Utilisateur user) {
 		this.listeNoire.add(user);
 	}
 	
+	/**
+	 * @param user
+	 */
 	public void supprimerListeNoire(Utilisateur user) {
 		for(int i=0; i<this.listeNoire.size(); i++) {
 			if(listeNoire.get(i).equals(user)) {
@@ -105,6 +125,9 @@ public class Utilisateur extends Observable implements Serializable {
 		}
 	}
 	
+	/**
+	 * @param listeUser
+	 */
 	public void ecrireListeNoire(ArrayList<Utilisateur> listeUser) {
 		ArrayList<Utilisateur> bdd = new ArrayList<Utilisateur>(); //liste des utilisateurs présents dans la base de données
 		
@@ -127,14 +150,23 @@ public class Utilisateur extends Observable implements Serializable {
 		}
 	}
 	
+	/**
+	 * @param user
+	 */
 	public void ajoutSignalement(Utilisateur user) {
 		user.nbSignalement = user.nbSignalement+1;
 	}
 	
+	/**
+	 * @param user
+	 */
 	public void supprimerSignalement(Utilisateur user) {
 		user.nbSignalement = user.nbSignalement-1;
 	}
 	
+	/**
+	 * @param user
+	 */
 	public void ecrireSignalement(Utilisateur user) {
 		ArrayList<Utilisateur> bdd = new ArrayList<Utilisateur>(); //liste des utilisateurs présents dans la base de données
 		
@@ -161,23 +193,30 @@ public class Utilisateur extends Observable implements Serializable {
 		    return "Nom: " + this.nom + ", " + "Prenom: " + this.prenom + ", " + "Tel: " + this.tel + ", " + "Email: " + this.email + ", " + "Mdp: " + this.mdp + ", " + "Type de véhicule: " + this.typeVehicule + ", " + "Type de conduite: " + this.typeConduite + ", " + "Comportement au volant: " + this.comportementAuVolant + ", " + "Liste noire: " + this.listeNoire + ", " + "Nombre de signalements: " + this.nbSignalement + "\n";
 		  }
 	 
+	/**
+	 * @param villeD
+	 * @param villeA
+	 * @param date
+	 * @return liste des voyages trouvés
+	 */
 	public ArrayList<Voyage> rechercherTrajet(String villeD, String villeA, String date){
 		LectureFichier lecture = new LectureFichier();
 		ArrayList<Voyage> bdd = new ArrayList<Voyage>();
 		ArrayList<Voyage> res = new ArrayList<Voyage>();
 		
-		try {
-			bdd = lecture.readTrip("trips.txt");
-			for(int i=0; i<bdd.size(); i++){
-				if(bdd.get(i).getDate().equals(date) && bdd.get(i).getDepart().equals(villeD) && bdd.get(i).getArrivee().equals(villeA)) {
-					res.add(bdd.get(i));
-				}
+		bdd = lecture.readTrip("trips.txt");
+		for(int i=0; i<bdd.size(); i++){
+			if(bdd.get(i).getDepart().equals(villeD) && bdd.get(i).getArrivee().equals(villeA)) {
+				res.add(bdd.get(i));
 			}
-		}catch(NullPointerException e) {}
-
+		}
 		return res;
 	}
 	
+	/**
+	 * @param listeVoyages
+	 * @return les champs des voyages trouvés
+	 */
 	public ArrayList<String> champsRechercher(ArrayList<Voyage> listeVoyages){
 		ArrayList<String> res = new ArrayList<String>();
 		for(int i=0; i<listeVoyages.size(); i++) {
@@ -193,6 +232,9 @@ public class Utilisateur extends Observable implements Serializable {
 	}
 	
 	
+	/**
+	 * @param voyage
+	 */
 	public void annulerVoyage(Voyage voyage) {
 		ArrayList<Voyage> bdd = new ArrayList<Voyage>(); //liste des voyages présents dans la base de données
 		
@@ -215,6 +257,9 @@ public class Utilisateur extends Observable implements Serializable {
 		}
 	}
 	
+	/**
+	 * @param voyage
+	 */
 	public void annulerReservation(Voyage voyage) {
 		ArrayList<Voyage> bdd = new ArrayList<Voyage>(); //liste des voyages présents dans la base de données
 		
@@ -239,6 +284,12 @@ public class Utilisateur extends Observable implements Serializable {
 		}
 	}
 	
+	/**
+	 * @param villeD
+	 * @param date
+	 * @param heureD
+	 * @param nbPlace
+	 */
 	public void creerVoyage(String villeD, String date, String heureD, Integer nbPlace) {
 		//on vide la pile utilisée pour la création de voyage
 		creationVoyage.clear();
@@ -264,6 +315,12 @@ public class Utilisateur extends Observable implements Serializable {
 	}
 	
 	
+	/**
+	 * @param villeEtape
+	 * @param heureA
+	 * @param lieuRdv
+	 * @param prix
+	 */
 	public void ajouterEtape(String villeEtape, String heureA, String lieuRdv, Integer prix) {
 		Voyage voyage = this.creationVoyage.get(0);
 		this.creationVoyage.clear();
@@ -308,6 +365,9 @@ public class Utilisateur extends Observable implements Serializable {
 		return this.listeVoyages.size();
 	}
 	
+	/**
+	 * @return les voyages crées ou réservés par un passager
+	 */
 	public ArrayList<String> mesVoyages(){ //renvoie toutes les caractéristiques de tous les voyages
 		ArrayList<String> res = new ArrayList<String>();
 		
@@ -345,6 +405,9 @@ public class Utilisateur extends Observable implements Serializable {
 		}
 	}
 	
+	/**
+	 * @return le résumé du voyage
+	 */
 	public ArrayList<String> resumeVoyage() {
 		Voyage voyage = creationVoyage.get(0);
 		ArrayList<String> res = new ArrayList<String>();
@@ -370,6 +433,10 @@ public class Utilisateur extends Observable implements Serializable {
 		return res;
 	}
 	
+	/**
+	 * @param voyage
+	 * @return les détails du voyage
+	 */
 	public ArrayList<String> afficherDetailsVoyage(Voyage voyage){
 		ArrayList<String> res = new ArrayList<String>();
 		if(this == voyage.conducteur) { // si l'utilisateur est le conducteur du voyage
@@ -421,6 +488,11 @@ public class Utilisateur extends Observable implements Serializable {
 	}
 
 	
+	/**
+	 * @param voyage
+	 * @param villeD
+	 * @param villeA
+	 */
 	public void reserver(Voyage voyage, String villeD, String villeA) {
 		
 		ArrayList<Voyage> bdd = new ArrayList<Voyage>(); //liste des voyages présents dans la base de données
