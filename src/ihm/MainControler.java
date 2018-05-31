@@ -9,12 +9,25 @@ import javax.swing.AbstractAction;
 
 import GestionDonnees.Utilisateur;
 
+/**
+ * Controleur gérant une session utilisateur. Se charge de créer toutes les vues et controleurs associés de sorte à générer tout l'interface
+ * @author Antoine
+ *
+ */
+
 public class MainControler{
 	Utilisateur utilisateur;
 	MainView mainView;
 	ControleurRechercherVoyage controleurRechercherVoyage;
 	ControleurCreationVoyage controleurCreationVoyage;
 	ControleurVueVoyages controleurVueVoyages;
+	
+	/**
+     * Constructeur du MainControler.
+     * 
+     * @param utilisateur
+     *            	Utilisateur connecté actuellement
+     */
 	
 	public MainControler(Utilisateur utilisateur) {
 		this.utilisateur = utilisateur;
