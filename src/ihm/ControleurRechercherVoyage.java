@@ -1,14 +1,20 @@
 package ihm;
 
 import java.awt.event.ActionEvent;
+import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
 import javax.swing.AbstractAction;
 
+import GestionDonnees.Utilisateur;
+import GestionDonnees.Voyage;
+
 public class ControleurRechercherVoyage {
 	VueRechercherVoyage vue;
+	Utilisateur utilisateur;
 
-	public ControleurRechercherVoyage() {
+	public ControleurRechercherVoyage(Utilisateur utilisateur) {
+		this.utilisateur = utilisateur;
 		this.vue = new VueRechercherVoyage();
 		
 		ActionRechercher rechercher = new ActionRechercher();
@@ -30,7 +36,10 @@ public class ControleurRechercherVoyage {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
-
+			ArrayList<Voyage> voyagesTrouves = utilisateur.rechercherTrajet(vue.txtDepart.getText(), vue.txtDestination.getText(), vue.txtDateJour.getText()+"/ "+vue.txtDateMois.getText()+"/ "+vue.txtDateAnnee.getText());
+			vue.gauche.setVisible(false);
+			vue.droite.setVisible(true);
+			
 		}
 
 	}

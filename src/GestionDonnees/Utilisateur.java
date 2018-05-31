@@ -2,9 +2,10 @@ package GestionDonnees;
 
 import entree_sortie.*;
 import java.util.ArrayList;
+import java.util.Observable;
 import java.io.Serializable;
 
-public class Utilisateur implements Serializable {
+public class Utilisateur extends Observable implements Serializable {
 	
 	private String nom;
 	private String prenom;
@@ -283,6 +284,12 @@ public class Utilisateur implements Serializable {
 		System.out.println("liste voyages: "+listeVoyages);
 		ecriture.writeTrip(voyage);
 		ecrireVoyageUser();
+		this.setChanged();
+		this.notifyObservers();
+	}
+	
+	public ArrayList<Voyage> getVoyages(){
+		return this.listeVoyages;
 	}
 	
 	public Integer getNbVoyages(){
@@ -354,25 +361,29 @@ public class Utilisateur implements Serializable {
 	public ArrayList<String> afficherDetailsVoyage(Voyage voyage){
 		ArrayList<String> res = new ArrayList<String>();
 		if(this == voyage.conducteur) { // si l'utilisateur est le conducteur du voyage
-			ArrayList<Etape> trajet = voyage.getTrajet();
 			ArrayList<Utilisateur> listePassagers = voyage.getPassagers();
 			for(int i=0; i<listePassagers.size(); i++) {
 				res.add(listePassagers.get(i).getNom());
 				res.add(listePassagers.get(i).getPrenom());
 				res.add(listePassagers.get(i).getTel());
-			}
-			
-			for(int i=0; i<trajet.size(); i++) {
-					for(int j=0; j<trajet.get(i).getPassagers().size(); j++) {
-						for(int k=0; k<listePassagers.size(); k++) {
-							if(trajet.get(i).getPassagers().get(j).equals(listePassagers.get(k))){
-								res.add(trajet.get(i).getVilleD());
-								res.add(trajet.get(i).getHeureDepart());
-								res.add(trajet.get(i).getVilleA());
-								res.add(trajet.get(i).getHeureArrivee());
+				
+				ArrayList<Voyage> listeVoyages = listePassagers.get(i).getListeVoyages();
+				for(int j=0; j<listeVoyages.size(); j++) {
+					if(listeVoyages.get(i).equals(voyage)) {
+						ArrayList<Etape> listeEtapes = listeVoyages.get(j).trajet;
+						for(int k=0; k<listeEtapes.size(); k++) {
+							ArrayList<Utilisateur> listePassagersEtape = listeEtapes.get(k).getPassagers();
+							for(int l=0; l<listePassagersEtape.size(); l++) {
+								if(listePassagersEtape.get(l).equals(listePassagers.get(i))){
+									res.add(listeEtapes.get(k).getVilleD());
+									res.add(listeEtapes.get(k).getHeureDepart());
+									res.add(listeEtapes.get(k).getVilleA());
+									res.add(listeEtapes.get(k).getHeureArrivee());
+								}
 							}
 						}
 					}
+				}
 			}
 		}
 		

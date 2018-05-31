@@ -7,8 +7,9 @@ import java.util.Observer;
 import javax.swing.AbstractAction;
 
 import GestionDonnees.Utilisateur;
+import java.util.Observer;
 
-public class ControleurVueVoyages {
+public class ControleurVueVoyages implements Observer{
 	VueVoyages vue;
 	Utilisateur utilisateur;
 	
@@ -43,6 +44,12 @@ public class ControleurVueVoyages {
 			// TODO Auto-generated method stub
 			
 		}
+		
+	}
+
+	@Override
+	public void update(Observable arg0, Object arg1) {
+		// TODO Auto-generated method stub
 		
 	}
 }

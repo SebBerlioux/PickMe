@@ -27,6 +27,7 @@ public class VueRechercherVoyage extends JPanel{
 		public JButton boutonRechercher;
 		
 		//panel droite rien -> on ajoutera les vues graces au mainControlerRechercherVoyages
+		
 
 		
 		public VueRechercherVoyage() {
