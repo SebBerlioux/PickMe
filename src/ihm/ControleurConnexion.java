@@ -17,6 +17,11 @@ import entree_sortie.LectureFichier;
 public class ControleurConnexion {
 	VueConnexion vue;
 	
+	/**
+     * Constructeur ControleurConnexion : génère et gère une fenêtre de connexion
+     * 
+     */
+	
 	public ControleurConnexion() {
 		this.vue = new VueConnexion();
 		

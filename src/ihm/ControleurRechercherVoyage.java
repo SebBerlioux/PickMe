@@ -17,6 +17,13 @@ import GestionDonnees.Voyage;
 public class ControleurRechercherVoyage {
 	VueRechercherVoyage vue;
 	Utilisateur utilisateur;
+	
+	/**
+     * Constructeur ControleurRechercherVoyage.
+     * 
+     * @param utilisateur
+     *            Utilisateur connecté actuellement
+     */
 
 	public ControleurRechercherVoyage(Utilisateur utilisateur) {
 		this.utilisateur = utilisateur;

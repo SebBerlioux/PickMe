@@ -14,6 +14,13 @@ import javax.swing.AbstractAction;
 public class ControleurSousVueRechercherVoyage {
 	SousVueRechercherVoyage vue;
 	ModelSousVueRechercher model;
+	
+	/**
+     * Constructeur ControleurSousVueRechercherVoyage.
+     * 
+     * @param model
+     *            Modèle contenant la liste des voyages de l'utilisateur en cours
+     */
 
 	public ControleurSousVueRechercherVoyage(ModelSousVueRechercher model) {
 		this.vue = new SousVueRechercherVoyage();

@@ -24,6 +24,13 @@ public class ControleurCreationVoyage {
 	Voyage voyage;
 	Utilisateur utilisateur;
 	
+	/**
+     * Constructeur ControleurCreationVoyage.
+     * 
+     * @param utilisateur
+     *            Utilisateur connecté actuellement
+     */
+	
 	public ControleurCreationVoyage(Utilisateur utilisateur) {
 		this.vue = new VueCreationVoyage();
 		this.voyage = new Voyage();

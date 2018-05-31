@@ -9,10 +9,23 @@ import javax.swing.AbstractAction;
 import GestionDonnees.Utilisateur;
 import java.util.Observer;
 
+/**
+ * Controleur gérant la sous vue VueVoyages, qui permet d'afficher le panel "Mes voyages"
+ * @author Antoine
+ *
+ */
+
 public class ControleurVueVoyages implements Observer{
 	VueVoyages vue;
 	Utilisateur utilisateur;
 	ModelSousVueVoyage model;
+	
+	/**
+     * Constructeur ControleurVueVoyages.
+     * 
+     * @param utilisateur
+     *            	Utilisateur connecté actuellement
+     */
 	
 	public ControleurVueVoyages(Utilisateur utilisateur) {
 		this.vue = new VueVoyages();

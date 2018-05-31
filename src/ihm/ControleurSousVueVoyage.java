@@ -7,7 +7,7 @@ import java.util.Observer;
 import javax.swing.AbstractAction;
 
 /**
- * Controleur gérant la sous vue SousVueVoyage, qui permet d'afficher un voyage de dans une liste de résultat d'une recherche
+ * Controleur gérant la sous vue SousVueVoyage, qui permet d'afficher un voyage dans "Mes voyages"
  * @author Antoine
  *
  */
@@ -16,6 +16,15 @@ public class ControleurSousVueVoyage implements Observer{
 	SousVueVoyage vue;
 	ModelSousVueVoyage model;
 	int id;
+	
+	/**
+     * Constructeur ControleurCreationVoyage.
+     * 
+     * @param model
+     *            	Modèle contenant la liste des voyages de l'utilisateur en cours
+     * @param id
+     * 				Identifiant du controleur de sous vue, comme ça il y a un seul controleur par sous vue
+     */
 
 	public ControleurSousVueVoyage(ModelSousVueVoyage model, int id) {
 		this.vue = new SousVueVoyage();
