@@ -79,12 +79,14 @@ public class Voyage implements Serializable {
 		return res;
 	}
 	
-	public Integer getNbPlacesTotales() {
-		Integer res = 0;
+	public Integer getNbPlacesMinimum() {
+		Integer mini = 20;
 		for(Etape etape : this.trajet) {
-			res = res + etape.nbPlace;
+			if(etape.nbPlace<mini) {
+				mini = etape.nbPlace;
+			}
 		}
-		return res;
+		return mini;
 	}
 	
 	

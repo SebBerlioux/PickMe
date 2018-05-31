@@ -1,14 +1,25 @@
 package ihm;
 
+import java.awt.Component;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
+import javax.swing.DefaultCellEditor;
 import javax.swing.JButton;
+import javax.swing.JCheckBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
 import javax.swing.JTextField;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableCellRenderer;
+
+import ihm.VueVoyages.buttonDetailsEditor;
+import ihm.VueVoyages.buttonDetailsRenderer;
+import ihm.VueVoyages.myTableModel;
 
 public class VueRechercherVoyage extends JPanel{
 		public JPanel gauche;
@@ -27,17 +38,20 @@ public class VueRechercherVoyage extends JPanel{
 		public JButton boutonRechercher;
 		
 		//panel droite rien -> on ajoutera les vues graces au mainControlerRechercherVoyages
+		public JTable myTable;
+		public String[] columnsNames = {"Départ", "Destination", "Heure départ", "Heure arrivée", "Prix", "Véhicule", "Nb de places restantes", "Détails"};
+		public Object[][] data;
+		public JButton buttonDetails = new JButton();
 		
 
 		
 		public VueRechercherVoyage() {
+			
 			this.gauche = new JPanel();
-			this.droite = new JPanel();
 			
 			//layouts
 			gauche.setLayout(new GridBagLayout());
 			GridBagConstraints c1 = new GridBagConstraints();
-			droite.setLayout(new BoxLayout(droite, BoxLayout.Y_AXIS));
 			GridBagConstraints c2 = new GridBagConstraints();
 			
 			//panel gauche
@@ -50,9 +64,6 @@ public class VueRechercherVoyage extends JPanel{
 			this.txtDateMois = new JTextField(2);
 			this.txtDateAnnee = new JTextField(4);
 			this.boutonRechercher = new JButton("Rechercher");
-			
-			//panel droite
-			
 			
 			//ajout des champs du panel gauche
 			c1.gridx = 0;
@@ -81,16 +92,69 @@ public class VueRechercherVoyage extends JPanel{
 			gauche.add(txtDateAnnee);
 			c1.gridx = 1;
 			c1.gridy = 3;
-			//gauche.add(boutonRechercher);
 			
 			gauche.setBorder(BorderFactory.createEtchedBorder());
-			droite.setBorder(BorderFactory.createEtchedBorder());
-			
-			droite.setVisible(false);
 			
 			this.add(gauche);
 			this.add(boutonRechercher);
+		}
+		
+		public void addVueDroite(Object[][] data) {
+			System.out.println("droite");
+			this.droite = new JPanel();
+			droite.setLayout(new BoxLayout(droite, BoxLayout.Y_AXIS));
+			this.data = data;
+			this.myTable = new JTable(data, columnsNames);
+			
+			myTableModel model = new myTableModel();
+			myTable.setModel(model);
+			myTable.getColumn("Détails").setCellRenderer(new buttonDetailsRenderer());
+			myTable.getColumn("Détails").setCellEditor(new buttonDetailsEditor(new JCheckBox()));
+			
+			droite.add(new JScrollPane(myTable));
+			droite.setBorder(BorderFactory.createEtchedBorder());
 			this.add(droite);
+			droite.setVisible(true);
+		}
+		
+		public class myTableModel extends DefaultTableModel {
+			
+			JButton buttonDetails = new JButton();
+
+			public myTableModel() {
+				super(data,columnsNames);
+			}
+
+			public boolean isCellEditable(int row,int cols) {		
+				return true;
+			}
+
+		}
+		
+		class buttonDetailsRenderer extends JButton implements TableCellRenderer {
+
+			public buttonDetailsRenderer() {
+				setOpaque(true);
+			}
+
+			public Component getTableCellRendererComponent(JTable table, Object value, 
+					boolean isSelected, boolean hasFocus, int row, int column) {
+				buttonDetails.setText("Détails");
+				return buttonDetails;
+			}
+
+		}
+		
+		class buttonDetailsEditor extends DefaultCellEditor {
+			
+			public buttonDetailsEditor(JCheckBox checkbox) {
+				super(checkbox);
+			}
+
+			public Component getTableCellEditorComponent(JTable table, Object value, boolean isSelected, int row, int column) {
+				buttonDetails.setText("Détails");
+				return buttonDetails;
+			}
 		}
 }
 

@@ -11,14 +11,12 @@ public class Main {
 	 ecriture.creerUtilisateur("Andrieux","Romain","0649736894","romandrieux29@gmail.com","red589z","Camion","lent","concentre");
 	 ecriture.creerUtilisateur("Mario","Luigi","0649746894","romandrieux28@gmail.com","red589z","Camion","lent","concentre");
 	 
-	 //System.out.println(lecture.readUser("users.txt"));
-	 //System.out.println(lecture.readTrip("trips.txt"));
+	 Utilisateur user = new Utilisateur("Berlioux","Seb","555655","seb","seb","Camion","lent","concentre");
+	 ecriture.writeUser(user);
 	 
-	 //System.out.println("res = " + user.rechercherTrajet("Brest", "Paris", "03/07/2018"));
-	 //user2.reserver(trip2, "Brest", "Paris");
-	 //System.out.println("res = " + user.rechercherTrajet("Brest", "Paris", "03/07/2018"));
-	 
-	 //System.out.println(lecture.readTrip("trips.txt"));
+	 user.creerVoyage("Nantes", "4/4/4", "10:10", 4);
+	 user.ajouterEtape("Brest", "45:5", "bar", 5);
+	 user.ecrireVoyage();
   }
 }
 	 

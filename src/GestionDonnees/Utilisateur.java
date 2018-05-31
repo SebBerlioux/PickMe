@@ -36,10 +36,7 @@ public class Utilisateur extends Observable implements Serializable {
 		this.creationVoyage = new ArrayList<Voyage>();
 	}
 	
-	/*public void newUtilisateur(Utilisateur user) {
-		System.out.println("Nouvel utilisateur créé: ");
-		//enregistrerNewUser(user);     partie de romain 
-	}*/
+	public Utilisateur() {} //constructeur par défaut
 	
 	public void getUtilisateur() {
 		System.out.println(this.nom + " " + this.prenom);
@@ -169,13 +166,28 @@ public class Utilisateur extends Observable implements Serializable {
 		ArrayList<Voyage> bdd = new ArrayList<Voyage>();
 		ArrayList<Voyage> res = new ArrayList<Voyage>();
 		
-		bdd = lecture.readTrip("trips.txt");
-		
-		for(int i=0; i<bdd.size(); i++){
-
-			if(bdd.get(i).getDate().equals(date) && bdd.get(i).getDepart().equals(villeD) && bdd.get(i).getArrivee().equals(villeA)) {
-				res.add(bdd.get(i));
+		try {
+			bdd = lecture.readTrip("trips.txt");
+			for(int i=0; i<bdd.size(); i++){
+				if(bdd.get(i).getDate().equals(date) && bdd.get(i).getDepart().equals(villeD) && bdd.get(i).getArrivee().equals(villeA)) {
+					res.add(bdd.get(i));
+				}
 			}
+		}catch(NullPointerException e) {}
+
+		return res;
+	}
+	
+	public ArrayList<String> champsRechercher(ArrayList<Voyage> listeVoyages){
+		ArrayList<String> res = new ArrayList<String>();
+		for(int i=0; i<listeVoyages.size(); i++) {
+			res.add(listeVoyages.get(i).getDepart());
+			res.add(listeVoyages.get(i).getArrivee());
+			res.add(listeVoyages.get(i).trajet.get(0).getHeureDepart());
+			res.add(listeVoyages.get(i).trajet.get(listeVoyages.get(i).trajet.size()-1).getHeureArrivee());
+			res.add(Integer.toString(listeVoyages.get(i).getPrix()));
+			res.add(listeVoyages.get(i).getConducteur().getTypeVehicule());
+			res.add(Integer.toString(listeVoyages.get(i).getNbPlacesMinimum()));
 		}
 		return res;
 	}
