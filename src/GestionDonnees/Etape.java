@@ -3,6 +3,11 @@ package GestionDonnees;
 import java.io.Serializable;
 import java.util.ArrayList;
 
+/**
+ * @author Sébastien & Romain
+ *
+ * Class Etape permettant de créer une étape du voyage entre deux villes
+ */
 public class Etape implements Serializable{
 
 	protected String villeD;
@@ -16,6 +21,22 @@ public class Etape implements Serializable{
 	
 	public Etape() {} //constructeur par défaut
 	
+	/**
+	 * @param villeD 
+	 * 			ville départ de l'étape
+	 * @param villeA 
+	 * 			ville arrivée de l'étape
+	 * @param prix
+	 * 			prix de l'étape
+	 * @param nbPlace
+	 * 			nombre de place disponible sur l'état
+	 * @param lieuRdv
+	 * 			lieu de rendez-vous
+	 * @param heureDepart
+	 * 			heure de départ du voyage
+	 * @param heureArriveeVilleA
+	 * 			heure d'arrivée estimée
+	 */
 	public Etape(String villeD, String villeA, Integer prix, Integer nbPlace, String lieuRdv, String heureDepart, String heureArriveeVilleA) {
 		this.villeD = villeD;
 		this.villeA = villeA;
@@ -59,6 +80,11 @@ public class Etape implements Serializable{
 		return this.passagers;
 	}
 	
+	/**
+	 * @param user
+	 * 
+	 * ajoute un passager à la liste de passager du voyage
+	 */
 	public void addPassager(Utilisateur user) {
 		this.passagers.add(user);
 	}

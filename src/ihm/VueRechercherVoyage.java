@@ -21,6 +21,11 @@ import ihm.VueVoyages.buttonDetailsEditor;
 import ihm.VueVoyages.buttonDetailsRenderer;
 import ihm.VueVoyages.myTableModel;
 
+/**
+ * @author Sébastien
+ *
+ * Vue gérant l'affichage de l'onglet "Rechercher un voyage"
+ */
 public class VueRechercherVoyage extends JPanel{
 		public JPanel gauche;
 		public JPanel milieu;
@@ -52,7 +57,7 @@ public class VueRechercherVoyage extends JPanel{
 			//layouts
 			gauche.setLayout(new GridBagLayout());
 			GridBagConstraints c1 = new GridBagConstraints();
-			GridBagConstraints c2 = new GridBagConstraints();
+			
 			
 			//panel gauche
 			this.depart = new JLabel("Départ: ");

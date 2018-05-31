@@ -1,17 +1,15 @@
 package ihm;
 
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
-import java.util.Observable;
-import java.util.Observer;
-
 import javax.swing.BorderFactory;
-import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JTextField;
 
+/**
+ * @author Sébastien
+ *
+ * Sous vue gérant l'affichage des voayges de l'utilisateur
+ */
 public class SousVueVoyage extends JPanel{
 
 	public JLabel trajet;

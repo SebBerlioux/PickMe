@@ -7,6 +7,11 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+/**
+ * @author Sébastien
+ *
+ * Vue gérant l'affichage de la frame de connection/inscription
+ */
 public class VueConnexion extends JFrame {
 
 	//Vue générale

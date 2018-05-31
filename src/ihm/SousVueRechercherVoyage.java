@@ -6,8 +6,12 @@ import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JTextField;
 
+/**
+ * @author Sébastien
+ *
+ * Sous vue gérant l'affichage des trajets trouvé lors d'une recherche
+ */
 public class SousVueRechercherVoyage extends JPanel{
 
 	public JLabel depart;

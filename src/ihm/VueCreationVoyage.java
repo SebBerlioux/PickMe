@@ -2,10 +2,8 @@ package ihm;
 
 import javax.swing.JPanel;
 
-import java.awt.Component;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
-import java.awt.GridLayout;
 
 import javax.swing.BorderFactory;
 import javax.swing.JTextField;
@@ -13,6 +11,11 @@ import javax.swing.JLabel;
 import javax.swing.JButton;
 
 
+/**
+ * @author Sébastien
+ *
+ * Vue gérant l'affichage de l'onglet "Créer un voyage"
+ */
 public class VueCreationVoyage extends JPanel {
 
 	//panel gauche
@@ -50,7 +53,6 @@ public class VueCreationVoyage extends JPanel {
 
 		//layouts
 		gauche.setLayout(new GridBagLayout());
-		GridBagConstraints c1 = new GridBagConstraints();
 		droite.setLayout(new GridBagLayout());
 		GridBagConstraints c2 = new GridBagConstraints();
 

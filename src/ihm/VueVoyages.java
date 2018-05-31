@@ -1,20 +1,13 @@
 package ihm;
 
-import java.awt.Component;
-import java.awt.Dimension;
-
 import javax.swing.BoxLayout;
-import javax.swing.DefaultCellEditor;
-import javax.swing.JButton;
-import javax.swing.JCheckBox;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
-import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableCellRenderer;
 
+/**
+ * @author Sébastien
+ *
+ * Vue gérant l'affichage de l'onglet "Mes Voyages"
+ */
 public class VueVoyages extends JPanel {
 	JPanel panelMain;
 			
