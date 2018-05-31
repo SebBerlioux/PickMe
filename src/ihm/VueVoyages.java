@@ -1,13 +1,11 @@
 package ihm;
 
 import java.awt.Component;
-import java.awt.Dimension;
 
 import javax.swing.BoxLayout;
 import javax.swing.DefaultCellEditor;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -17,10 +15,12 @@ import javax.swing.table.TableCellRenderer;
 
 public class VueVoyages extends JPanel {
 	
+	public JPanel panelLeft;
+	
 	//VueVoyages
 	public JTable myTable;
 	public String[] columnsNames = {"Trajet", "Date", "Conducteur", "Prix", "Etat", "Détails"};
-	public Object[][] data;
+	public Object[][] data = new String[0][0];
 	public JButton buttonDetails = new JButton();
 	
 	//VueVoyageConducteur
@@ -42,7 +42,7 @@ public class VueVoyages extends JPanel {
 	public JButton annulerVoyageur, enregistrerVoyageur;	
 			
 	//Constructeur
-	public VueVoyages(Object[][] data) {
+	public VueVoyages(Object[][]data) {
 		this.myTable = new JTable(data, columnsNames);
 		this.myTableConducteur = new JTable(dataConducteur, columnsNamesConducteur);
 		this.data = data;
@@ -50,7 +50,7 @@ public class VueVoyages extends JPanel {
 		//Vue générale
 		JPanel panelRight1 = new JPanel();
 		JPanel panelRight2 = new JPanel();
-		JPanel panelLeft = new JPanel();
+		this.panelLeft = new JPanel();
 		
 		//VueVoyage
 		myTableModel model = new myTableModel();
@@ -218,5 +218,6 @@ public class VueVoyages extends JPanel {
 			return true;
 		}
 
-	}         
+	}
+         
 }
