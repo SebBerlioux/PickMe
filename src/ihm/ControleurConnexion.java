@@ -9,6 +9,11 @@ import GestionDonnees.Utilisateur;
 import entree_sortie.EcritureFichier;
 import entree_sortie.LectureFichier;
 
+/**
+ * Controleur gérant le module de connexion
+ * @author Antoine
+ *
+ */
 public class ControleurConnexion {
 	VueConnexion vue;
 	

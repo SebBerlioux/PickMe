@@ -13,6 +13,12 @@ import GestionDonnees.Utilisateur;
 import GestionDonnees.Voyage;
 import ihm.MainControler.ActionExit;
 
+/**
+ * Controleur gérant la vue VueCreationVoyage
+ * @author Antoine
+ *
+ */
+
 public class ControleurCreationVoyage {
 	VueCreationVoyage vue;
 	Voyage voyage;

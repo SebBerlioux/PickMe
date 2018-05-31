@@ -5,9 +5,14 @@ import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
 import javax.swing.AbstractAction;
-
 import GestionDonnees.Utilisateur;
 import GestionDonnees.Voyage;
+
+/**
+ * Controleur gérant la vue VueRechercherVoyage
+ * @author Antoine
+ *
+ */
 
 public class ControleurRechercherVoyage {
 	VueRechercherVoyage vue;
